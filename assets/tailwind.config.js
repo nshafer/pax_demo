@@ -9,7 +9,15 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/*_web.ex",
-    "../lib/*_web/**/*.*ex"
+    "../lib/*_web/**/*.*ex",
+
+    // // Configured Tailwind to scan all of the pax files to find used classes and include in our app.css
+    // "../deps/pax/assets/js/**/*.*js",
+    // "../deps/pax/lib/**/*components.*ex",
+
+    // // Same as above, but for development when pax_demo is adjacent to pax
+    // "../../pax/assets/js/**/*.*js",
+    // "../../pax/lib/**/*components.*ex",
   ],
   theme: {
     extend: {
