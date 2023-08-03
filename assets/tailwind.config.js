@@ -18,6 +18,9 @@ module.exports = {
       }
     },
   },
+  experimental: {
+    optimizeUniversalDefaults: true
+  },
   plugins: [
     require("@tailwindcss/forms"),
     // Allows prefixing tailwind classes with LiveView classes to add rules
