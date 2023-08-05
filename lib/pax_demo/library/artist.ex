@@ -4,6 +4,7 @@ defmodule PaxDemo.Library.Artist do
 
   schema "artists" do
     field :name, :string
+    field :slug, :string
     field :rating, :float
     field :started, :naive_datetime
     field :ended, :naive_datetime

@@ -4,6 +4,7 @@ defmodule PaxDemo.Repo.Migrations.CreateArtists do
   def change do
     create table(:artists) do
       add :name, :string, null: false
+      add :slug, :string, null: false
       add :rating, :float
       add :started, :naive_datetime, null: false
       add :ended, :naive_datetime
@@ -12,6 +13,7 @@ defmodule PaxDemo.Repo.Migrations.CreateArtists do
       timestamps()
     end
 
+    create index(:artists, [:slug], unique: true)
     create index(:artists, [:current_label_id])
   end
 end

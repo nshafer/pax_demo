@@ -3,6 +3,7 @@ defmodule PaxDemo.Library.Album do
   import Ecto.Changeset
 
   schema "albums" do
+    field :uuid, Ecto.UUID, autogenerate: true
     field :name, :string
     field :rating, :float
     field :length_sec, :integer

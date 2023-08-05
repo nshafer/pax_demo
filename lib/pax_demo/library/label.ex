@@ -4,6 +4,7 @@ defmodule PaxDemo.Library.Label do
 
   schema "labels" do
     field :name, :string
+    field :slug, :string
     field :rating, :float
     field :founded, :integer
     field :accepting_submissions, :boolean, default: false
