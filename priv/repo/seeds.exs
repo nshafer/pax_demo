@@ -15,9 +15,9 @@ alias PaxDemo.Repo
 # :rand.seed(:exsss, {?p, ?a, ?x})
 Logger.configure(level: :info)
 
-num_labels = 100
-num_artists = 1000
-num_albums = 2000
+num_labels = 10
+num_artists = 100
+num_albums = 200
 
 defmodule Seed do
   @words ~w(
@@ -85,9 +85,7 @@ defmodule Seed do
   end
 
   def random_rating() do
-    :rand.uniform()
-    |> Kernel.*(5.0)
-    |> Float.round(1)
+    :rand.uniform() * 5.0
   end
 
   def random_album_length() do
