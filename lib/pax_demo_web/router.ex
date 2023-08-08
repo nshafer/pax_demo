@@ -19,6 +19,10 @@ defmodule PaxDemoWeb.Router do
 
     get "/", PageController, :home
     live "/labels", LabelLive.Index, :index
+    live "/labels/new", LabelLive.Detail, :new
+    live "/labels/:id", LabelLive.Detail, :show
+    live "/labels/:id/edit", LabelLive.Detail, :edit
+    live "/labels/:id/delete", LabelLive.Detail, :delete
   end
 
   # Other scopes may use custom stacks.
