@@ -12,7 +12,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
   end
 
   def adapter(_params, _session, _socket) do
-    {Pax.Index.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
+    {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
   def fields(_params, _session, _socket) do
@@ -28,7 +28,8 @@ defmodule PaxDemoWeb.LabelLive.Index do
     ]
   end
 
-  def format_rating(l), do: l.rating |> Float.round(1) |> Float.to_string()
+  def format_rating(%{rating: nil}), do: "-"
+  def format_rating(%{rating: rating}), do: rating |> Float.round(1) |> Float.to_string()
 
   # def on_mount(arg, params, session, socket) do
   #   IO.puts("#{__MODULE__}.on_mount(#{inspect(arg)}, #{inspect(params)}, #{inspect(session)}")

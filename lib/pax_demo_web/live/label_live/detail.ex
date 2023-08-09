@@ -12,6 +12,6 @@ defmodule PaxDemoWeb.LabelLive.Detail do
   end
 
   def adapter(_params, _session, _socket) do
-    {Pax.Detail.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
+    {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 end
