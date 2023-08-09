@@ -14,4 +14,9 @@ defmodule PaxDemoWeb.LabelLive.Detail do
   def adapter(_params, _session, _socket) do
     {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
+
+  def lookup(query, %{"id" => id}, _uri, _socket) do
+    import Ecto.Query
+    from q in query, where: q.id == ^id
+  end
 end
