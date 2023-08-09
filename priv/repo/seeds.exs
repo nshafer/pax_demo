@@ -114,7 +114,7 @@ Enum.map(1..num_labels, fn _ ->
   %Label{
     name: name,
     slug: Seed.slugify(name),
-    rating: Seed.random_rating(),
+    rating: Enum.random([nil, Seed.random_rating()]),
     founded: Seed.random_year(),
     accepting_submissions: Enum.random([true, false])
   }
@@ -134,7 +134,7 @@ Enum.map(1..num_artists, fn _ ->
   %Artist{
     name: name,
     slug: Seed.slugify(name),
-    rating: Seed.random_rating(),
+    rating: Enum.random([nil, Seed.random_rating()]),
     started: Seed.random_naive_datetime(),
     ended: Enum.random([nil, Seed.random_naive_datetime()]),
     current_label_id: Enum.random([nil, Enum.random(labels).id])
@@ -154,7 +154,7 @@ Enum.map(1..num_albums, fn _ ->
 
   %Album{
     name: Seed.random_album_name(),
-    rating: Seed.random_rating(),
+    rating: Enum.random([nil, Seed.random_rating()]),
     length_sec: Seed.random_album_length(),
     artist_id: artist.id,
     label_id: Enum.random([nil, artist.current_label_id, Enum.random(labels).id])
