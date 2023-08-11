@@ -3,3 +3,19 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+@layer components {
+    a {
+        @apply font-bold underline;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .pax-index-table-header {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .pax-index-table-row:nth-child(2n) {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}

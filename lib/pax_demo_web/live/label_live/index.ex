@@ -3,7 +3,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
   use Pax.Index.Live
 
   def render(assigns) do
-    IO.inspect(assigns, label: "assigns")
+    # IO.inspect(assigns, label: "assigns")
 
     ~H"""
     <h1 class="text-2xl mb-3">Labels</h1>
@@ -18,7 +18,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
   def fields(_params, _session, _socket) do
     [
       {:id, :integer, link: true},
-      {:name, :string, link: true},
+      {:name, :string, link: fn l -> url(~p"/labels/#{l.id}?from=name") end},
       {:name_cap, :string, value: fn l -> String.upcase(l.name) end},
       {:rating, :string, value: {__MODULE__, :format_rating}},
       {:rating_f, :float, title: "Rating!", round: 2, value: :rating},
@@ -27,6 +27,8 @@ defmodule PaxDemoWeb.LabelLive.Index do
       {:updated_at, :datetime}
     ]
   end
+
+  def link(%{id: id}), do: ~p"/labels/#{id}"
 
   def format_rating(%{rating: nil}), do: "-"
   def format_rating(%{rating: rating}), do: rating |> Float.round(1) |> Float.to_string()
