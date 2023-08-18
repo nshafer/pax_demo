@@ -1,5 +1,6 @@
 defmodule PaxDemoWeb.Router do
   use PaxDemoWeb, :router
+  use Pax.Admin.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -18,11 +19,15 @@ defmodule PaxDemoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
     live "/labels", LabelLive.Index, :index
     live "/labels/new", LabelLive.Detail, :new
     live "/labels/:id", LabelLive.Detail, :show
     live "/labels/:id/edit", LabelLive.Detail, :edit
     live "/labels/:id/delete", LabelLive.Detail, :delete
+
+    # TODO: root layout?
+    pax_admin "/admin", Admin
   end
 
   # Other scopes may use custom stacks.
