@@ -7,15 +7,15 @@ defmodule PaxDemoWeb.LabelLive.Index do
 
     ~H"""
     <h1 class="text-2xl mb-3">Labels</h1>
-    <Pax.Index.Components.index fields={@fields} objects={@objects} />
+    <Pax.Index.Components.index pax_fields={@pax_fields} objects={@objects} />
     """
   end
 
-  def adapter(_params, _session, _socket) do
+  def pax_adapter(_params, _session, _socket) do
     {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
-  def fields(_params, _session, _socket) do
+  def pax_fields(_params, _session, _socket) do
     [
       {:id, :integer, link: true},
       {:name, :string, link: fn l -> url(~p"/labels/#{l.id}?from=name") end},

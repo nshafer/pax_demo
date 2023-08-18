@@ -10,11 +10,11 @@ defmodule PaxDemoWeb.LabelLive.Detail do
       <.link navigate={~p"/labels"}>⬅</.link>
       <%= @object.name %>
     </h1>
-    <Pax.Detail.Components.detail class="" fieldsets={@fieldsets} object={@object} />
+    <Pax.Detail.Components.detail class="" pax_fieldsets={@pax_fieldsets} object={@object} />
     """
   end
 
-  def adapter(_params, _session, _socket) do
+  def pax_adapter(_params, _session, _socket) do
     {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
@@ -23,7 +23,7 @@ defmodule PaxDemoWeb.LabelLive.Detail do
     from q in query, where: q.id == ^id
   end
 
-  # def fields(_params, _session, _socket) do
+  # def pax_fieldsets(_params, _session, _socket) do
   #   [
   #     [
   #       {:id, :integer},
@@ -36,7 +36,7 @@ defmodule PaxDemoWeb.LabelLive.Detail do
   #   ]
   # end
 
-  def fieldsets(_params, _session, _socket) do
+  def pax_fieldsets(_params, _session, _socket) do
     [
       default: [
         # {:name, :string},
