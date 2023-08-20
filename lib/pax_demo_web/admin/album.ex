@@ -7,8 +7,8 @@ defmodule PaxDemoWeb.Admin.Album do
 
   def pax_index_fields(_params, _session, _socket) do
     [
-      {:id, :integer},
-      {:uuid, :string},
+      {:id, :integer, link: true},
+      {:uuid, :string, link: true},
       {:name, :string},
       {:rating, :float, title: "Rating!", round: 2},
       {:length, :string, value: {__MODULE__, :length}}
@@ -32,8 +32,15 @@ defmodule PaxDemoWeb.Admin.Album do
     "#{min}:#{sec}"
   end
 
+  def index_link(object, opts) do
+    section = Keyword.get(opts, :section)
+    resource = Keyword.get(opts, :resource)
+
+    PaxDemoWeb.Admin.resource_detail_path(section, resource, object, :uuid)
+  end
+
   def lookup(query, %{"id" => id}, _uri, _socket) do
     import Ecto.Query
-    from q in query, where: q.id == ^id
+    from q in query, where: q.uuid == ^id
   end
 end
