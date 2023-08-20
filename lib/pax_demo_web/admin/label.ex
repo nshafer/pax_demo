@@ -9,7 +9,7 @@ defmodule PaxDemoWeb.Admin.Label do
   # end
 
   def pax_adapter(_params, _session, _socket) do
-    {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
+    {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
   def pax_index_fields(_params, _session, _socket) do

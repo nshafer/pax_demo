@@ -2,7 +2,7 @@ defmodule PaxDemoWeb.Admin.Artist do
   use Pax.Admin.Resource
 
   def pax_adapter(_params, _session, _socket) do
-    {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Artist}
+    {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Artist}
   end
 
   def pax_index_fields(_params, _session, _socket) do

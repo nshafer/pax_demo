@@ -11,9 +11,8 @@ defmodule PaxDemoWeb.LabelLive.Index do
     """
   end
 
-  def pax_adapter(_params, _session, _socket) do
-    {Pax.SchemaAdapter, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
-  end
+  def pax_adapter(_params, _session, _socket),
+    do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
 
   def pax_fields(_params, _session, _socket) do
     [
