@@ -25,8 +25,15 @@ defmodule PaxDemoWeb.Router do
     live "/labels/:id", LabelLive.Detail, :show
     live "/labels/:id/edit", LabelLive.Detail, :edit
     live "/labels/:id/delete", LabelLive.Detail, :delete
+  end
 
-    # TODO: root layout?
+  pipeline :admin do
+    plug :put_root_layout, html: {Pax.Admin.Layouts, :root}
+  end
+
+  scope "/", PaxDemoWeb do
+    pipe_through [:browser, :admin]
+
     pax_admin "/admin", Admin
   end
 

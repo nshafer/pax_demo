@@ -20,6 +20,6 @@ defmodule PaxDemoWeb.Admin do
   end
 
   section :library2, "Music Library Two" do
-    resource :album, "Albums", PaxDemoWeb.Admin.Album
+    resource :album, "Albums Two", PaxDemoWeb.Admin.Album
   end
 end
