@@ -12,12 +12,19 @@ defmodule PaxDemoWeb.Admin do
   config title: "Pax Demo Admin"
 
   resource :label, "Labels", PaxDemoWeb.Admin.Label
+  resource :artist, "Artists", PaxDemoWeb.Admin.Artist
+  resource :album, "Albums", PaxDemoWeb.Admin.Album
 
   section :library, "Music Library" do
     resource :label, "Labels", PaxDemoWeb.Admin.Label
     resource :artist, "Artists", PaxDemoWeb.Admin.Artist
     resource :album, "Albums", PaxDemoWeb.Admin.Album
+    resource :album2, "Albums 2", PaxDemoWeb.Admin.Album
   end
+
+  resource :label2, "Labels", PaxDemoWeb.Admin.Label
+  resource :artist2, "Artists", PaxDemoWeb.Admin.Artist
+  resource :album2, "Albums", PaxDemoWeb.Admin.Album
 
   section :library2, "Music Library Two" do
     resource :album, "Albums Two", PaxDemoWeb.Admin.Album
