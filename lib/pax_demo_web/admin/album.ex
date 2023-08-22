@@ -43,4 +43,8 @@ defmodule PaxDemoWeb.Admin.Album do
     import Ecto.Query
     from q in query, where: q.uuid == ^id
   end
+
+  def detail_title(object) do
+    object.name
+  end
 end
