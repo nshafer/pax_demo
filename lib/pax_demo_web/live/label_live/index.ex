@@ -15,17 +15,22 @@ defmodule PaxDemoWeb.LabelLive.Index do
     do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
 
   def pax_fields(_params, _session, _socket) do
-    [
-      {:id, :integer, link: true},
-      {:name, :string, link: fn l -> url(~p"/labels/#{l.id}?from=name") end},
-      {:name_cap, :string, value: fn l -> String.upcase(l.name) end},
-      {:rating, :string, value: {__MODULE__, :format_rating}},
-      {:rating_f, :float, title: "Rating!", round: 2, value: :rating},
-      {:accepting_submissions, :boolean, true: "Yes", false: "No"},
-      {:inserted_at, :datetime},
-      {:updated_at, :datetime}
-    ]
+    [:id, {:name, link: true}, :rating, :accepting_submissions, :inserted_at, :updated_at]
   end
+
+  # def pax_fields(_params, _session, _socket) do
+  #   [
+  #     {:id, :integer, link: true},
+  #     {:name, :string, link: fn l -> url(~p"/labels/#{l.id}?from=name") end},
+  #     :name,
+  #     {:name_cap, :string, value: fn l -> String.upcase(l.name) end},
+  #     {:rating, :string, value: {__MODULE__, :format_rating}},
+  #     {:rating_f, :float, title: "Rating!", round: 2, value: :rating},
+  #     {:accepting_submissions, :boolean, true: "Yes", false: "No"},
+  #     {:inserted_at, :datetime},
+  #     {:updated_at, :datetime}
+  #   ]
+  # end
 
   def link(%{id: id}), do: ~p"/labels/#{id}"
 

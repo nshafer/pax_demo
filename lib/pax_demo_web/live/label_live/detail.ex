@@ -23,6 +23,10 @@ defmodule PaxDemoWeb.LabelLive.Detail do
     from q in query, where: q.id == ^id
   end
 
+  def pax_fieldsets(_params, _session, _socket) do
+    [:id, :name, :rating, :accepting_submissions, :inserted_at, :updated_at]
+  end
+
   # def pax_fieldsets(_params, _session, _socket) do
   #   [
   #     [
@@ -36,37 +40,37 @@ defmodule PaxDemoWeb.LabelLive.Detail do
   #   ]
   # end
 
-  def pax_fieldsets(_params, _session, _socket) do
-    [
-      default: [
-        # {:name, :string},
-        [
-          {:name, :string},
-          {:slug, :string}
-        ],
-        # [
-        #   {:name, :string},
-        #   {:slug, :string},
-        #   {:founded, :integer, title: "Founded (YYYY)"}
-        # ],
-        # [
-        #   {:name, :string},
-        #   {:slug, :string},
-        #   {:founded, :integer, title: "Founded (YYYY)"},
-        #   {:rating, :float, title: "Rating (0-5)", round: 2}
-        # ],
-        # [
-        #   {:rating, :float, title: "Rating (0-5)", round: 2},
-        #   {:accepting_submissions, :boolean, true: "Yes", false: "No"}
-        # ],
-        {:rating, :float, title: "Rating (0-5)", round: 2},
-        {:accepting_submissions, :boolean, true: "Yes", false: "No"}
-      ],
-      meta: [
-        {:id, :integer, title: "ID"},
-        {:inserted_at, :datetime},
-        {:updated_at, :datetime}
-      ]
-    ]
-  end
+  # def pax_fieldsets(_params, _session, _socket) do
+  #   [
+  #     default: [
+  #       # {:name, :string},
+  #       [
+  #         {:name, :string},
+  #         {:slug, :string}
+  #       ],
+  #       # [
+  #       #   {:name, :string},
+  #       #   {:slug, :string},
+  #       #   {:founded, :integer, title: "Founded (YYYY)"}
+  #       # ],
+  #       # [
+  #       #   {:name, :string},
+  #       #   {:slug, :string},
+  #       #   {:founded, :integer, title: "Founded (YYYY)"},
+  #       #   {:rating, :float, title: "Rating (0-5)", round: 2}
+  #       # ],
+  #       # [
+  #       #   {:rating, :float, title: "Rating (0-5)", round: 2},
+  #       #   {:accepting_submissions, :boolean, true: "Yes", false: "No"}
+  #       # ],
+  #       {:rating, :float, title: "Rating (0-5)", round: 2},
+  #       {:accepting_submissions, :boolean, true: "Yes", false: "No"}
+  #     ],
+  #     meta: [
+  #       {:id, :integer, title: "ID"},
+  #       {:inserted_at, :datetime},
+  #       {:updated_at, :datetime}
+  #     ]
+  #   ]
+  # end
 end

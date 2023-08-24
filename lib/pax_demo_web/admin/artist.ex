@@ -6,21 +6,22 @@ defmodule PaxDemoWeb.Admin.Artist do
   end
 
   def pax_index_fields(_params, _session, _socket) do
-    [
-      {:id, :integer},
-      {:name, :string},
-      {:rating, :float, title: "Rating!", round: 2},
-      {:started, :datetime},
-      {:ended, :datetime}
-    ]
+    [:id, {:name, link: true}, :rating, :started, :ended]
   end
 
   def pax_detail_fieldsets(_params, _session, _socket) do
     [
-      [{:name, :string}, {:slug, :string}],
-      {:rating, :float, round: 2},
-      [{:started, :datetime}, {:ended, :datetime}],
-      {:current_label_id, :integer}
+      [:name, :slug],
+      :rating,
+      [:started, :ended],
+      :current_label_id
     ]
+
+    # [
+    #   [{:name, :string}, {:slug, :string}],
+    #   {:rating, :float, round: 2},
+    #   [{:started, :datetime}, {:ended, :datetime}],
+    #   {:current_label_id, :integer}
+    # ]
   end
 end

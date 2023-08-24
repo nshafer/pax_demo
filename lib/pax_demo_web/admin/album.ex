@@ -7,10 +7,10 @@ defmodule PaxDemoWeb.Admin.Album do
 
   def pax_index_fields(_params, _session, _socket) do
     [
-      {:id, :integer, link: true},
-      {:uuid, :string, link: true},
-      {:name, :string},
-      {:rating, :float, title: "Rating!", round: 2},
+      :id,
+      {:uuid, link: true},
+      {:name, link: true},
+      {:rating, round: 2},
       {:length, :string, value: {__MODULE__, :length}}
     ]
   end
@@ -18,9 +18,10 @@ defmodule PaxDemoWeb.Admin.Album do
   def pax_detail_fieldsets(_params, _session, _socket) do
     [
       default: [
-        [{:id, :integer}, {:uuid, :string}],
-        {:name, :string},
-        {:rating, :float, round: 2},
+        [:id, :uuid],
+        :name,
+        :rating,
+        :length_sec,
         {:length, :string, value: {__MODULE__, :length}}
       ]
     ]

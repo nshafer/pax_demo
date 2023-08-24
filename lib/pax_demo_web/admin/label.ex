@@ -13,31 +13,33 @@ defmodule PaxDemoWeb.Admin.Label do
   end
 
   def pax_index_fields(_params, _session, _socket) do
-    [
-      {:id, :integer, link: true},
-      {:name, :string, link: true},
-      {:rating, :float, title: "Rating!", round: 2},
-      {:accepting_submissions, :boolean, true: "Yes", false: "No"},
-      {:inserted_at, :datetime},
-      {:updated_at, :datetime}
-    ]
+    [:id, {:name, link: true}, :rating, :accepting_submissions, :inserted_at, :updated_at]
   end
 
   def pax_detail_fieldsets(_params, _session, _socket) do
     [
-      default: [
-        [
-          {:name, :string},
-          {:slug, :string}
-        ],
-        {:rating, :float, title: "Rating (0-5)", round: 2},
-        {:accepting_submissions, :boolean, true: "Yes", false: "No"}
-      ],
-      meta: [
-        {:id, :integer, title: "ID"},
-        {:inserted_at, :datetime},
-        {:updated_at, :datetime}
-      ]
+      :id,
+      :name,
+      :rating,
+      :accepting_submissions,
+      :inserted_at,
+      :updated_at
     ]
+
+    # [
+    #   default: [
+    #     [
+    #       {:name, :string},
+    #       {:slug, :string}
+    #     ],
+    #     {:rating, :float, title: "Rating (0-5)", round: 2},
+    #     {:accepting_submissions, :boolean, true: "Yes", false: "No"}
+    #   ],
+    #   meta: [
+    #     {:id, :integer, title: "ID"},
+    #     {:inserted_at, :datetime},
+    #     {:updated_at, :datetime}
+    #   ]
+    # ]
   end
 end
