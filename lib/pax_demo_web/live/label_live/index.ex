@@ -32,7 +32,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
   #   ]
   # end
 
-  def link(%{id: id}), do: ~p"/labels/#{id}"
+  def pax_link(%{id: id}), do: ~p"/labels/#{id}"
 
   def format_rating(%{rating: nil}), do: "-"
   def format_rating(%{rating: rating}), do: rating |> Float.round(1) |> Float.to_string()
