@@ -1,4 +1,4 @@
-defmodule PaxDemoWeb.Admin.Label do
+defmodule PaxDemoWeb.Admin.LabelResource do
   use PaxDemoWeb, :pax_resource
 
   # def render_index(assigns) do

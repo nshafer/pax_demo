@@ -1,4 +1,4 @@
-defmodule PaxDemoWeb.Admin.Artist do
+defmodule PaxDemoWeb.Admin.ArtistResource do
   use Pax.Admin.Resource
 
   def pax_adapter(_params, _session, _socket) do
