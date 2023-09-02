@@ -7,7 +7,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
 
     ~H"""
     <h1 class="text-2xl mb-3">Labels</h1>
-    <Pax.Index.Components.index pax_fields={@pax_fields} objects={@objects} />
+    <Pax.Index.Components.index pax={@pax} objects={@objects} />
     """
   end
 

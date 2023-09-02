@@ -10,7 +10,7 @@ defmodule PaxDemoWeb.LabelLive.Detail do
       <.link navigate={~p"/labels"}>⬅</.link>
       <%= @object.name %>
     </h1>
-    <Pax.Detail.Components.detail class="" pax_fieldsets={@pax_fieldsets} object={@object} />
+    <Pax.Detail.Components.detail pax={@pax} object={@object} />
     """
   end
 
