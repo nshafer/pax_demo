@@ -33,11 +33,11 @@ defmodule PaxDemoWeb.Admin.AlbumResource do
     "#{min}:#{sec}"
   end
 
-  def index_link(object, opts) do
-    section = Keyword.get(opts, :section)
-    resource = Keyword.get(opts, :resource)
-
-    PaxDemoWeb.Admin.resource_detail_path(section, resource, object, :uuid)
+  def index_link(object, resource) do
+    case resource.section do
+      nil -> PaxDemoWeb.Admin.resource_detail_path(resource.name, object, :uuid)
+      section -> PaxDemoWeb.Admin.resource_detail_path(section.name, resource.name, object, :uuid)
+    end
   end
 
   def lookup(query, %{"id" => id}, _uri, _socket) do
