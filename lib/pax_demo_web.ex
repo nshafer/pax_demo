@@ -79,14 +79,14 @@ defmodule PaxDemoWeb do
     end
   end
 
-  def pax_resource do
-    quote do
-      use Pax.Admin.Resource
-      use Phoenix.Component
+  # def pax_resource do
+  #   quote do
+  #     use Pax.Admin.Resource
+  #     use Phoenix.Component
 
-      unquote(html_helpers())
-    end
-  end
+  #     unquote(html_helpers())
+  #   end
+  # end
 
   defp html_helpers do
     quote do

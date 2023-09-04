@@ -34,7 +34,8 @@ defmodule PaxDemoWeb.Router do
   scope "/", PaxDemoWeb do
     pipe_through [:browser, :admin]
 
-    pax_admin "/admin", Admin
+    pax_admin "/admin", MainAdmin.Site
+    pax_admin "/partner/admin", PartnerAdmin.Site
   end
 
   # Other scopes may use custom stacks.

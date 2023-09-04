@@ -1,4 +1,4 @@
-defmodule PaxDemoWeb.Admin.AlbumResource do
+defmodule PaxDemoWeb.PartnerAdmin.AlbumResource do
   use Pax.Admin.Resource
 
   def pax_adapter(_params, _session, _socket) do
@@ -7,8 +7,6 @@ defmodule PaxDemoWeb.Admin.AlbumResource do
 
   def pax_index_fields(_params, _session, _socket) do
     [
-      :id,
-      {:uuid, link: true},
       {:name, link: true},
       {:rating, round: 2},
       {:length, :string, value: {__MODULE__, :length}}
@@ -18,7 +16,6 @@ defmodule PaxDemoWeb.Admin.AlbumResource do
   def pax_detail_fieldsets(_params, _session, _socket) do
     [
       default: [
-        [:id, :uuid],
         :name,
         :rating,
         :length_sec,
@@ -31,18 +28,6 @@ defmodule PaxDemoWeb.Admin.AlbumResource do
     min = div(album.length_sec, 60)
     sec = rem(album.length_sec, 60) |> to_string() |> String.pad_leading(2, "0")
     "#{min}:#{sec}"
-  end
-
-  def index_link(object, resource) do
-    case resource.section do
-      nil -> PaxDemoWeb.Admin.resource_detail_path(resource.name, object, :uuid)
-      section -> PaxDemoWeb.Admin.resource_detail_path(section.name, resource.name, object, :uuid)
-    end
-  end
-
-  def lookup(query, %{"id" => id}, _uri, _socket) do
-    import Ecto.Query
-    from q in query, where: q.uuid == ^id
   end
 
   def detail_title(object) do
