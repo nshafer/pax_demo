@@ -1,4 +1,4 @@
-defmodule PaxDemoWeb.PartnerAdmin.Site do
+defmodule PaxDemoWeb.PartnerAdmin.PrivateSite do
   use Pax.Admin.Site, router: PaxDemoWeb.Router
 
   config title: "Partner Admin"
