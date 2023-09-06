@@ -47,7 +47,8 @@ defmodule PaxDemo.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:benchee, "~> 1.0", only: :dev}
+      {:benchee, "~> 1.0", only: :dev},
+      {:live_admin, "~> 0.10.2"}
     ] ++ pax_deps()
   end
 
