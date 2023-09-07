@@ -26,12 +26,6 @@ defmodule PaxDemoWeb.Router do
     live "/labels/:id", LabelLive.Detail, :show
     live "/labels/:id/edit", LabelLive.Detail, :edit
     live "/labels/:id/delete", LabelLive.Detail, :delete
-
-    live_admin "/live_admin" do
-      admin_resource("/labels", PaxDemoWeb.LiveAdmin.LabelResource)
-      admin_resource("/artists", PaxDemoWeb.LiveAdmin.ArtistResource)
-      admin_resource("/albums", PaxDemoWeb.LiveAdmin.AlbumResource)
-    end
   end
 
   pipeline :admin do
@@ -44,6 +38,12 @@ defmodule PaxDemoWeb.Router do
     pax_admin "/admin", MainAdmin.Site, as: :admin
     pax_admin "/partner/admin", PartnerAdmin.PrivateSite
     pax_admin "/public/admin", PartnerAdmin.PublicSite
+
+    live_admin "/live_admin" do
+      admin_resource("/labels", PaxDemoWeb.LiveAdmin.LabelResource)
+      admin_resource("/artists", PaxDemoWeb.LiveAdmin.ArtistResource)
+      admin_resource("/albums", PaxDemoWeb.LiveAdmin.AlbumResource)
+    end
   end
 
   # Other scopes may use custom stacks.
