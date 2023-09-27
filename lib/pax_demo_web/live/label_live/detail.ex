@@ -3,14 +3,11 @@ defmodule PaxDemoWeb.LabelLive.Detail do
   use Pax.Detail.Live
 
   def render(assigns) do
-    # IO.inspect(assigns, label: "assigns")
+    # dbg(assigns)
 
     ~H"""
-    <h1 class="text-2xl pb-2 border-b mb-5">
-      <.link navigate={~p"/labels"}>⬅</.link>
-      <%= @object.name %>
-    </h1>
-    <Pax.Detail.Components.detail pax={@pax} object={@object} />
+    <Pax.Detail.Components.show :if={@live_action == :show} pax={@pax} object={@object} />
+    <Pax.Detail.Components.edit :if={@live_action in [:edit, :new]} pax={@pax} object={@object} form={@form} />
     """
   end
 
@@ -18,10 +15,15 @@ defmodule PaxDemoWeb.LabelLive.Detail do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
-  def lookup(query, %{"id" => id}, _uri, _socket) do
-    import Ecto.Query
-    from q in query, where: q.id == ^id
-  end
+  def pax_index_path(_socket), do: ~p"/labels/"
+  def pax_show_path(_socket, object), do: ~p"/labels/#{object.id}"
+  def pax_edit_path(_socket, object), do: ~p"/labels/#{object.id}/edit"
+  def pax_object_name(_socket, object), do: object.name
+
+  # def pax_lookup(query, %{"id" => id}, _uri, _socket) do
+  #   import Ecto.Query
+  #   from q in query, where: q.id == ^id
+  # end
 
   # def pax_fieldsets(_params, _session, _socket) do
   #   [:id, :name, :rating, :accepting_submissions, :inserted_at, :updated_at]
@@ -33,10 +35,13 @@ defmodule PaxDemoWeb.LabelLive.Detail do
         :name,
         :slug
       ],
-      {:rating, :float, title: "Rating (0-5)", round: 2},
+      [
+        :founded,
+        {:rating, :float, title: "Rating (0-5)", round: 2, required: false}
+      ],
       {:accepting_submissions, :boolean, true: "Yes", false: "No"},
-      {:inserted_at, :datetime},
-      {:updated_at, :datetime}
+      {:inserted_at, :datetime, immutable: true},
+      {:updated_at, :datetime, immutable: true}
     ]
   end
 

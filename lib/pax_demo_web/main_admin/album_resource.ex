@@ -35,12 +35,12 @@ defmodule PaxDemoWeb.MainAdmin.AlbumResource do
 
   def index_link(object, resource) do
     case resource.section do
-      nil -> PaxDemoWeb.MainAdmin.Site.resource_detail_path(resource.name, object, :uuid)
-      section -> PaxDemoWeb.MainAdmin.Site.resource_detail_path(section.name, resource.name, object, :uuid)
+      nil -> PaxDemoWeb.MainAdmin.Site.resource_show_path(resource.name, object, :uuid)
+      section -> PaxDemoWeb.MainAdmin.Site.resource_show_path(section.name, resource.name, object, :uuid)
     end
   end
 
-  def lookup(query, %{"id" => id}, _uri, _socket) do
+  def pax_lookup(query, %{"id" => id}, _uri, _socket) do
     import Ecto.Query
     from q in query, where: q.uuid == ^id
   end

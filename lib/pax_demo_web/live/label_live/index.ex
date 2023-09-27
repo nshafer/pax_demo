@@ -3,10 +3,9 @@ defmodule PaxDemoWeb.LabelLive.Index do
   use Pax.Index.Live
 
   def render(assigns) do
-    # IO.inspect(assigns, label: "assigns")
+    # dbg(assigns.pax)
 
     ~H"""
-    <h1 class="text-2xl mb-3">Labels</h1>
     <Pax.Index.Components.index pax={@pax} objects={@objects} />
     """
   end
@@ -15,7 +14,15 @@ defmodule PaxDemoWeb.LabelLive.Index do
     do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
 
   def pax_fields(_params, _session, _socket) do
-    [:id, {:name, link: true}, :rating, :accepting_submissions, :inserted_at, :updated_at]
+    [
+      :id,
+      {:name, link: true},
+      :founded,
+      :rating,
+      :accepting_submissions
+      # :inserted_at,
+      # {:updated_at, :datetime, format: "%Y-%m-%d %H:%M:%S"}
+    ]
   end
 
   # def pax_fields(_params, _session, _socket) do
@@ -33,6 +40,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
   # end
 
   def pax_link(%{id: id}), do: ~p"/labels/#{id}"
+  def pax_new_path(_socket), do: ~p"/labels/new"
 
   def format_rating(%{rating: nil}), do: "-"
   def format_rating(%{rating: rating}), do: rating |> Float.round(1) |> Float.to_string()
