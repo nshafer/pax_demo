@@ -1,11 +1,11 @@
 defmodule PaxDemoWeb.PartnerAdmin.AlbumResource do
   use Pax.Admin.Resource
 
-  def pax_adapter(_params, _session, _socket) do
+  def pax_adapter(_socket) do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album}
   end
 
-  def pax_index_fields(_params, _session, _socket) do
+  def pax_index_fields(_socket) do
     [
       {:name, link: true},
       {:rating, round: 2},
@@ -13,7 +13,7 @@ defmodule PaxDemoWeb.PartnerAdmin.AlbumResource do
     ]
   end
 
-  def pax_detail_fieldsets(_params, _session, _socket) do
+  def pax_detail_fieldsets(_socket) do
     [
       default: [
         :name,

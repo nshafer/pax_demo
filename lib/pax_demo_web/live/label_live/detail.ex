@@ -11,7 +11,7 @@ defmodule PaxDemoWeb.LabelLive.Detail do
     """
   end
 
-  def pax_adapter(_params, _session, _socket) do
+  def pax_adapter(_socket) do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
@@ -25,11 +25,11 @@ defmodule PaxDemoWeb.LabelLive.Detail do
   #   from q in query, where: q.id == ^id
   # end
 
-  # def pax_fieldsets(_params, _session, _socket) do
+  # def pax_fieldsets(_socket) do
   #   [:id, :name, :rating, :accepting_submissions, :inserted_at, :updated_at]
   # end
 
-  def pax_fieldsets(_params, _session, _socket) do
+  def pax_fieldsets(_socket) do
     [
       [
         :name,
@@ -45,7 +45,7 @@ defmodule PaxDemoWeb.LabelLive.Detail do
     ]
   end
 
-  # def pax_fieldsets(_params, _session, _socket) do
+  # def pax_fieldsets(_socket) do
   #   [
   #     default: [
   #       # {:name, :string},

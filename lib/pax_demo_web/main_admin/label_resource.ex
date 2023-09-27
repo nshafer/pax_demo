@@ -8,7 +8,7 @@ defmodule PaxDemoWeb.MainAdmin.LabelResource do
   #   """
   # end
 
-  def pax_adapter(_params, _session, _socket) do
+  def pax_adapter(_socket) do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
@@ -16,7 +16,7 @@ defmodule PaxDemoWeb.MainAdmin.LabelResource do
   #   []
   # end
 
-  def pax_index_fields(_params, _session, _socket) do
+  def pax_index_fields(_socket) do
     [:id, {:name, link: true}, :rating, :accepting_submissions, :inserted_at, :updated_at]
   end
 
@@ -31,7 +31,7 @@ defmodule PaxDemoWeb.MainAdmin.LabelResource do
   #   ]
   # end
 
-  def pax_detail_fieldsets(_params, _session, _socket) do
+  def pax_detail_fieldsets(_socket) do
     [
       default: [
         [

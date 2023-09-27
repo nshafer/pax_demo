@@ -10,10 +10,10 @@ defmodule PaxDemoWeb.LabelLive.Index do
     """
   end
 
-  def pax_adapter(_params, _session, _socket),
+  def pax_adapter(_socket),
     do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
 
-  def pax_fields(_params, _session, _socket) do
+  def pax_fields(_socket) do
     [
       :id,
       {:name, link: true},
@@ -25,7 +25,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
     ]
   end
 
-  # def pax_fields(_params, _session, _socket) do
+  # def pax_fields(_socket) do
   #   [
   #     {:id, :integer, link: true},
   #     {:name, :string, link: fn l -> url(~p"/labels/#{l.id}?from=name") end},
