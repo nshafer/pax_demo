@@ -39,7 +39,7 @@ defmodule PaxDemoWeb.LabelLive.Index do
   #   ]
   # end
 
-  def pax_link(%{id: id}), do: ~p"/labels/#{id}"
+  def pax_field_link(%{id: id}), do: ~p"/labels/#{id}"
   def pax_new_path(_socket), do: ~p"/labels/new"
 
   def format_rating(%{rating: nil}), do: "-"
