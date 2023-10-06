@@ -24,10 +24,6 @@ defmodule PaxDemoWeb.LabelLive do
   def pax_new_path(_socket), do: ~p"/labels/new"
 
   @impl true
-  # TODO: remove pax_field_link and instead use show_path or edit_path, if defined?
-  def pax_field_link(%{id: id}), do: ~p"/labels/#{id}"
-
-  @impl true
   def pax_show_path(_socket, object), do: ~p"/labels/#{object.id}"
 
   @impl true
@@ -41,6 +37,7 @@ defmodule PaxDemoWeb.LabelLive do
     [
       :id,
       {:name, link: true},
+      # :name,
       :founded,
       :rating,
       :accepting_submissions

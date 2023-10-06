@@ -2,7 +2,7 @@ defmodule PaxDemoWeb.MainAdmin.AlbumResource do
   use Pax.Admin.Resource
 
   def pax_adapter(_socket) do
-    {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album}
+    {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album, id_field: :uuid}
   end
 
   def pax_index_fields(_socket) do
@@ -33,19 +33,7 @@ defmodule PaxDemoWeb.MainAdmin.AlbumResource do
     "#{min}:#{sec}"
   end
 
-  def index_link(object, resource) do
-    case resource.section do
-      nil -> PaxDemoWeb.MainAdmin.Site.resource_show_path(resource.name, object, :uuid)
-      section -> PaxDemoWeb.MainAdmin.Site.resource_show_path(section.name, resource.name, object, :uuid)
-    end
-  end
-
-  def pax_lookup(query, %{"id" => id}, _uri, _socket) do
-    import Ecto.Query
-    from q in query, where: q.uuid == ^id
-  end
-
-  def detail_title(object) do
+  def object_name(_socket, object) do
     object.name
   end
 end
