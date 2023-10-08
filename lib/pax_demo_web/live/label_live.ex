@@ -24,13 +24,13 @@ defmodule PaxDemoWeb.LabelLive do
   def new_path(_socket), do: ~p"/labels/new"
 
   @impl true
-  def show_path(_socket, object), do: ~p"/labels/#{object.id}"
+  def show_path(object, _socket), do: ~p"/labels/#{object.id}"
 
   @impl true
-  def edit_path(_socket, object), do: ~p"/labels/#{object.id}/edit"
+  def edit_path(object, _socket), do: ~p"/labels/#{object.id}/edit"
 
   @impl true
-  def object_name(_socket, object), do: object.name
+  def object_name(object, _socket), do: object.name
 
   @impl true
   def index_fields(_socket) do

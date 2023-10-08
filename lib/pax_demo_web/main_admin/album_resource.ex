@@ -33,7 +33,7 @@ defmodule PaxDemoWeb.MainAdmin.AlbumResource do
     "#{min}:#{sec}"
   end
 
-  def object_name(_socket, object) do
+  def object_name(object, _socket) do
     object.name
   end
 end
