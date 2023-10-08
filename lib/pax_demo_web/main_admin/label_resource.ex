@@ -31,13 +31,13 @@ defmodule PaxDemoWeb.MainAdmin.LabelResource do
           {:name, :string},
           {:slug, :string}
         ],
-        {:rating, :float, title: "Rating (0-5)", round: 2},
+        {:rating, :float, label: "Rating (0-5)", round: 2},
         {:accepting_submissions, :boolean, true: "Yes", false: "No"}
       ],
       meta: [
-        {:id, :integer, title: "ID"},
-        {:inserted_at, :datetime},
-        {:updated_at, :datetime}
+        {:id, :integer, label: "ID#", immutable: true},
+        {:inserted_at, :datetime, immutable: true},
+        {:updated_at, :datetime, immutable: true}
       ]
     ]
   end

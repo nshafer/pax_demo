@@ -6,6 +6,14 @@ defmodule PaxDemoWeb.LabelLive do
   def render(assigns) do
     # dbg(assigns.pax)
 
+    if assigns[:object] do
+      IO.puts("Object: #{inspect(assigns[:object])}")
+    end
+
+    if assigns[:objects] do
+      IO.puts("Num objects: #{length(assigns[:objects])}")
+    end
+
     ~H"""
     <Pax.Interface.Components.index :if={@live_action == :index} pax={@pax} objects={@objects} />
     <Pax.Interface.Components.show :if={@live_action == :show} pax={@pax} object={@object} />
