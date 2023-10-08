@@ -14,26 +14,26 @@ defmodule PaxDemoWeb.LabelLive do
   end
 
   @impl true
-  def pax_adapter(_socket),
+  def adapter(_socket),
     do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
 
   @impl true
-  def pax_index_path(_socket), do: ~p"/labels/"
+  def index_path(_socket), do: ~p"/labels/"
 
   @impl true
-  def pax_new_path(_socket), do: ~p"/labels/new"
+  def new_path(_socket), do: ~p"/labels/new"
 
   @impl true
-  def pax_show_path(_socket, object), do: ~p"/labels/#{object.id}"
+  def show_path(_socket, object), do: ~p"/labels/#{object.id}"
 
   @impl true
-  def pax_edit_path(_socket, object), do: ~p"/labels/#{object.id}/edit"
+  def edit_path(_socket, object), do: ~p"/labels/#{object.id}/edit"
 
   @impl true
-  def pax_object_name(_socket, object), do: object.name
+  def object_name(_socket, object), do: object.name
 
   @impl true
-  def pax_fields(_socket) do
+  def index_fields(_socket) do
     [
       :id,
       {:name, link: true},
@@ -47,7 +47,7 @@ defmodule PaxDemoWeb.LabelLive do
   end
 
   @impl true
-  def pax_fieldsets(_socket) do
+  def fieldsets(_socket) do
     [
       [
         :name,

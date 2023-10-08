@@ -1,26 +1,19 @@
 defmodule PaxDemoWeb.MainAdmin.LabelResource do
   use Pax.Admin.Resource
 
-  # def render_index(assigns) do
-  #   ~H"""
-  #   <h1 class="text-2xl mb-3 flex justify-between">Labels <small>PaxDemoWeb.Admin.Label</small></h1>
-  #   <Pax.Index.Components.index pax_fields={@pax_fields} objects={@objects} />
-  #   """
-  # end
-
-  def pax_adapter(_socket) do
+  def adapter(_socket) do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
   end
 
-  # def pax_index_fields(_params, _session, _socket) do
+  # def index_fields(_params, _session, _socket) do
   #   []
   # end
 
-  def pax_index_fields(_socket) do
+  def index_fields(_socket) do
     [:id, {:name, link: true}, :rating, :accepting_submissions, :inserted_at, :updated_at]
   end
 
-  # def pax_detail_fieldsets(_params, _session, _socket) do
+  # def fieldsets(_params, _session, _socket) do
   #   [
   #     :id,
   #     :name,
@@ -31,7 +24,7 @@ defmodule PaxDemoWeb.MainAdmin.LabelResource do
   #   ]
   # end
 
-  def pax_detail_fieldsets(_socket) do
+  def fieldsets(_socket) do
     [
       default: [
         [

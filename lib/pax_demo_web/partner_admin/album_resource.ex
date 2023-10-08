@@ -1,11 +1,11 @@
 defmodule PaxDemoWeb.PartnerAdmin.AlbumResource do
   use Pax.Admin.Resource
 
-  def pax_adapter(_socket) do
+  def adapter(_socket) do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album}
   end
 
-  def pax_index_fields(_socket) do
+  def index_fields(_socket) do
     [
       {:name, link: true},
       {:rating, round: 2},
@@ -13,7 +13,7 @@ defmodule PaxDemoWeb.PartnerAdmin.AlbumResource do
     ]
   end
 
-  def pax_detail_fieldsets(_socket) do
+  def fieldsets(_socket) do
     [
       default: [
         :name,
@@ -28,9 +28,5 @@ defmodule PaxDemoWeb.PartnerAdmin.AlbumResource do
     min = div(album.length_sec, 60)
     sec = rem(album.length_sec, 60) |> to_string() |> String.pad_leading(2, "0")
     "#{min}:#{sec}"
-  end
-
-  def detail_title(object) do
-    object.name
   end
 end

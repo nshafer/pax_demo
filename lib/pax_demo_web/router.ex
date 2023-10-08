@@ -38,6 +38,10 @@ defmodule PaxDemoWeb.Router do
     pax_admin "/admin", MainAdmin.Site, as: :admin
     pax_admin "/partner/admin", PartnerAdmin.PrivateSite
     pax_admin "/public/admin", PartnerAdmin.PublicSite
+  end
+
+  scope "/", PaxDemoWeb do
+    pipe_through [:browser]
 
     live_admin "/live_admin" do
       admin_resource("/labels", PaxDemoWeb.LiveAdmin.LabelResource)

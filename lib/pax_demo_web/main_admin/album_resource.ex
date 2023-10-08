@@ -1,11 +1,11 @@
 defmodule PaxDemoWeb.MainAdmin.AlbumResource do
   use Pax.Admin.Resource
 
-  def pax_adapter(_socket) do
+  def adapter(_socket) do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album, id_field: :uuid}
   end
 
-  def pax_index_fields(_socket) do
+  def index_fields(_socket) do
     [
       :id,
       {:uuid, link: true},
@@ -15,7 +15,7 @@ defmodule PaxDemoWeb.MainAdmin.AlbumResource do
     ]
   end
 
-  def pax_detail_fieldsets(_socket) do
+  def fieldsets(_socket) do
     [
       default: [
         [:id, :uuid],
