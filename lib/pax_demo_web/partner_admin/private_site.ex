@@ -3,7 +3,7 @@ defmodule PaxDemoWeb.PartnerAdmin.PrivateSite do
 
   config title: "Partner Admin"
 
-  resource :label, "Labels", PaxDemoWeb.PartnerAdmin.LabelResource
-  resource :artist, "Artists", PaxDemoWeb.PartnerAdmin.ArtistResource
-  resource :album, "Albums", PaxDemoWeb.PartnerAdmin.AlbumResource
+  resource :labels, PaxDemoWeb.PartnerAdmin.LabelResource
+  resource :artists, PaxDemoWeb.PartnerAdmin.ArtistResource
+  resource :albums, PaxDemoWeb.PartnerAdmin.AlbumResource
 end

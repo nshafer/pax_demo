@@ -12,26 +12,26 @@ defmodule PaxDemoWeb.MainAdmin.Site do
   config title: "Main Admin"
 
   # TODO: remove "title" field, put singlular_name and plural_name in opts, overridable in the resource
-  resource :label, "Labels", PaxDemoWeb.MainAdmin.LabelResource, sort: :name
-  resource :artist, "Artists", PaxDemoWeb.MainAdmin.ArtistResource
-  resource :album, "Albums", PaxDemoWeb.MainAdmin.AlbumResource
+  resource :labels, PaxDemoWeb.MainAdmin.LabelResource, sort: :name
+  resource :artists, PaxDemoWeb.MainAdmin.ArtistResource
+  resource :albums, PaxDemoWeb.MainAdmin.AlbumResource
 
-  # link ("More info", "https://somewhere.com/asdf"
+  # link "More info", "https://somewhere.com/asdf"
 
-  section :library, "Music Library" do
-    resource :label, "Labels", PaxDemoWeb.MainAdmin.LabelResource
-    resource :artist, "Artists", PaxDemoWeb.MainAdmin.ArtistResource
-    resource :album, "Albums", PaxDemoWeb.MainAdmin.AlbumResource
-    resource :album2, "Albums 2", PaxDemoWeb.MainAdmin.AlbumResource
+  section :library do
+    resource :labels, PaxDemoWeb.MainAdmin.LabelResource
+    resource :artists, PaxDemoWeb.MainAdmin.ArtistResource
+    resource :albums, PaxDemoWeb.MainAdmin.AlbumResource
+    resource :albums2, PaxDemoWeb.MainAdmin.AlbumResource, label: "Second Albums"
     # page :info, "Information", PaxDemoWeb.Admin.InfoPage
   end
 
-  resource :label2, "Labels", PaxDemoWeb.MainAdmin.LabelResource
-  resource :artist2, "Artists", PaxDemoWeb.MainAdmin.ArtistResource
-  resource :album2, "Albums", PaxDemoWeb.MainAdmin.AlbumResource
+  resource :labels2, PaxDemoWeb.MainAdmin.LabelResource
+  resource :artists2, PaxDemoWeb.MainAdmin.ArtistResource
+  resource :albums2, PaxDemoWeb.MainAdmin.AlbumResource
 
-  section :library2, "Music Library Two" do
-    resource :album, "Albums Two", PaxDemoWeb.MainAdmin.AlbumResource
+  section :library2, label: "Music Library Two" do
+    resource :albums_two, PaxDemoWeb.MainAdmin.AlbumResource
   end
 
   # def config(_params, _session, _socket) do
@@ -44,7 +44,7 @@ defmodule PaxDemoWeb.MainAdmin.Site do
   #   [
   #     label: %{title: "Labels", resource: PaxDemoWeb.MainAdmin.LabelResource},
   #     artist: %{resource: PaxDemoWeb.MainAdmin.ArtistResource, some_opt: "asdf"},
-  #     library: [
+  #     music_library: [
   #       label: %{resource: PaxDemoWeb.MainAdmin.LabelResource},
   #       artist: %{resource: PaxDemoWeb.MainAdmin.ArtistResource},
   #       album: %{resource: PaxDemoWeb.MainAdmin.AlbumResource}
