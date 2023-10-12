@@ -39,3 +39,5 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+// Import Bootstrap JS for interactive features
+import '../node_modules/bootstrap/dist/js/bootstrap.js';

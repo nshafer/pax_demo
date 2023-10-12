@@ -1,0 +1,120 @@
+// App Styles
+//
+// All styles for the main public application. This is not how the admin pages are styled.
+
+// This uses bootstrap for basic styling. It also uses sass to apply bootstrap styles to the pax classes via
+// @extend directives. This is done this way so that we can easily style the pax classes without having to
+// override the pax components. This is an example of how you can style a CRUD page that you build from the
+// Pax.Interface primitives.
+//
+// Another options is to juse define all of the CSS yourself, such as
+//
+// .pax-index-table {
+//   border-collapse: collapse;
+//   border-spacing: 0;
+//   width: 100%;
+//   border: 1px solid #ddd;
+// }
+//
+// Another option is to override all of the Pax.Interface.Components to render them with the bootstrap classes
+// in addition to the pax classes. This is a lot of work, but it is the most flexible option.
+//
+// This solution marries the two together with the least amount of overlap. It does require having a sass build
+// process in the mix, though.
+//
+// This has nothing to do with the Pax.Admin interface, which is imported on those pages directly from Pax.Admin,
+// and is built on Tailwind.
+
+// Make sure the client error flash doesn't appear while LV is loading
+[data-phx-main]:not(.phx-loading, .phx-error, .phx-connected) #client-error {
+    display: none !important;
+}
+
+// Set some custom variables to configure Bootstrap
+$primary: #17567a;
+$btn-color: #fff;
+
+// Import all of Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.pax {
+    font-size: 0.875em;
+}
+
+/*******************/
+/* Misc Components */
+/*******************/
+
+.pax-link {
+    font-weight: bold;
+}
+
+.pax-button {
+    @extend .btn;
+    @extend .btn-primary;
+}
+
+.pax-button-secondary {
+    @extend .btn;
+    @extend .btn-secondary;
+}
+
+/**************/
+/* Pax Header */
+/**************/
+
+.pax-header-title {
+    @extend h2;
+}
+
+
+/************************/
+/* Pax Index Components */
+/************************/
+
+.pax-table-wrapper:focus {
+    @extend .focus-ring;
+}
+
+.pax-index-table {
+    @extend .table;
+    @extend .table-sm;
+    @extend .table-hover;
+}
+
+
+
+/*************************/
+/* Pax Detail Components */
+/*************************/
+
+.pax-detail-fieldset-heading {
+    @extend h3;
+}
+
+.pax-detail .pax-field-label {
+    font-weight: bold;
+}
+
+/************************/
+/* Pax Field Components */
+/************************/
+
+.pax-field-control-input {
+    @extend .form-control;
+}
+
+.pax-field-control-checkbox {
+    @extend .form-check-input;
+}
+
+.pax-field-control-input.has-errors:not(.phx-no-feedback) {
+    @extend .is-invalid;
+}
+
+.pax-field-errors {
+    // .invalid-feedback is hidden by default then shown when it has a sibling .is-invalid, which won't happen,
+    // so we manually set this to `display: block` to make it visible.
+    @extend .invalid-feedback;
+    display: block;
+}

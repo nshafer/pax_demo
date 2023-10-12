@@ -6,20 +6,34 @@ defmodule PaxDemoWeb.LabelLive do
   def render(assigns) do
     # dbg(assigns.pax)
 
-    if assigns[:object] do
-      IO.puts("Object: #{inspect(assigns[:object])}")
-    end
+    # if assigns[:object] do
+    #   IO.puts("Object: #{inspect(assigns[:object])}")
+    # end
 
-    if assigns[:objects] do
-      IO.puts("Num objects: #{length(assigns[:objects])}")
-    end
+    # if assigns[:objects] do
+    #   IO.puts("Num objects: #{length(assigns[:objects])}")
+    # end
 
     ~H"""
-    <Pax.Interface.Components.index :if={@live_action == :index} pax={@pax} objects={@objects} />
-    <Pax.Interface.Components.show :if={@live_action == :show} pax={@pax} object={@object} />
-    <Pax.Interface.Components.edit :if={@live_action in [:edit, :new]} pax={@pax} object={@object} form={@form} />
+    <%= if assigns[:pax] do %>
+      <Pax.Interface.Components.index :if={@live_action == :index} pax={@pax} objects={@objects} />
+      <Pax.Interface.Components.show :if={@live_action == :show} pax={@pax} object={@object} />
+      <Pax.Interface.Components.new :if={@live_action == :new} pax={@pax} object={@object} form={@form} />
+      <Pax.Interface.Components.edit :if={@live_action == :edit} pax={@pax} object={@object} form={@form} />
+    <% else %>
+      Loading...
+    <% end %>
     """
   end
+
+  # @impl true
+  # def pax_init(_params, _session, socket) do
+  #   if connected?(socket) do
+  #     {:cont, socket}
+  #   else
+  #     {:halt, socket}
+  #   end
+  # end
 
   @impl true
   def adapter(_socket),
@@ -57,17 +71,24 @@ defmodule PaxDemoWeb.LabelLive do
   @impl true
   def fieldsets(_socket) do
     [
-      [
-        :name,
-        :slug
+      default: [
+        [
+          :name,
+          :slug
+        ],
+        [
+          :founded,
+          {:rating, :float, title: "Rating (0-5)", round: 2, required: false}
+        ],
+        {:accepting_submissions, :boolean, true: "Yes", false: "No"}
       ],
-      [
-        :founded,
-        {:rating, :float, title: "Rating (0-5)", round: 2, required: false}
-      ],
-      {:accepting_submissions, :boolean, true: "Yes", false: "No"},
-      {:inserted_at, :datetime, immutable: true},
-      {:updated_at, :datetime, immutable: true}
+      metadata: [
+        [
+          {:id, immutable: true},
+          {:inserted_at, :datetime, immutable: true},
+          {:updated_at, :datetime, immutable: true}
+        ]
+      ]
     ]
   end
 

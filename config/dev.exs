@@ -26,7 +26,7 @@ config :pax_demo, PaxDemoWeb.Endpoint,
   secret_key_base: "9e+HpNEyMWiIwpGJaGxUaTRbqCQzPaEhFuHKV1feacPRJt10xXuIRMmd/pGjb58X",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+    sass: {DartSass, :install_and_run, [:default, ~w(--watch --embed-source-map --source-map-urls=absolute)]}
   ]
 
 # Configure Phoenix.CodeReloader to reload pax as well during dev
