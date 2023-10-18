@@ -28,12 +28,8 @@ defmodule PaxDemoWeb.Router do
     live "/labels/:id/delete", LabelLive, :delete
   end
 
-  pipeline :admin do
-    plug :put_root_layout, html: {Pax.Admin.Layouts, :root}
-  end
-
   scope "/", PaxDemoWeb do
-    pipe_through [:browser, :admin]
+    pipe_through [:browser]
 
     pax_admin "/admin", MainAdmin.Site, as: :admin
     pax_admin "/partner/admin", PartnerAdmin.PrivateSite

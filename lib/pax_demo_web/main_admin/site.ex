@@ -11,7 +11,6 @@ defmodule PaxDemoWeb.MainAdmin.Site do
 
   config title: "Main Admin"
 
-  # TODO: remove "title" field, put singlular_name and plural_name in opts, overridable in the resource
   resource :labels, PaxDemoWeb.MainAdmin.LabelResource, sort: :name
   resource :artists, PaxDemoWeb.MainAdmin.ArtistResource
   resource :albums, PaxDemoWeb.MainAdmin.AlbumResource
