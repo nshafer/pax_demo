@@ -1,6 +1,7 @@
 defmodule PaxDemoWeb.LabelLive do
   use PaxDemoWeb, :live_view
   use Pax.Interface
+  import Pax.Interface.Components
 
   @impl true
   def render(assigns) do
@@ -16,10 +17,10 @@ defmodule PaxDemoWeb.LabelLive do
 
     ~H"""
     <%= if assigns[:pax] do %>
-      <Pax.Interface.Components.index :if={@live_action == :index} pax={@pax} objects={@objects} />
-      <Pax.Interface.Components.show :if={@live_action == :show} pax={@pax} object={@object} />
-      <Pax.Interface.Components.new :if={@live_action == :new} pax={@pax} object={@object} form={@form} />
-      <Pax.Interface.Components.edit :if={@live_action == :edit} pax={@pax} object={@object} form={@form} />
+      <.pax_index :if={@live_action == :index} pax={@pax} objects={@objects} />
+      <.pax_show :if={@live_action == :show} pax={@pax} object={@object} />
+      <.pax_new :if={@live_action == :new} pax={@pax} object={@object} form={@form} />
+      <.pax_edit :if={@live_action == :edit} pax={@pax} object={@object} form={@form} />
     <% else %>
       Loading...
     <% end %>
