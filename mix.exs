@@ -41,13 +41,14 @@ defmodule PaxDemo.MixProject do
       {:phoenix_live_view, "~> 0.19.0"},
       {:floki, ">= 0.30.0", only: :test},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.2.1", only: :dev},
+      {:dart_sass, "~> 0.7.0", only: :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:benchee, "~> 1.0", only: :dev},
-      {:dart_sass, "~> 0.7.0"},
       {:live_admin, "~> 0.10.2"}
     ] ++ pax_deps()
   end
@@ -72,9 +73,14 @@ defmodule PaxDemo.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.setup": ["sass.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["sass default", "esbuild default"],
-      "assets.deploy": ["sass default --no-source-map --style=compressed", "esbuild default --minify", "phx.digest"]
+      "assets.setup": ["tailwind.install --if-missing", "sass.install --if-missing", "esbuild.install --if-missing"],
+      "assets.build": ["tailwind default", "sass default", "esbuild default"],
+      "assets.deploy": [
+        "tailwind default --minify",
+        "sass default --no-source-map --style=compressed",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end

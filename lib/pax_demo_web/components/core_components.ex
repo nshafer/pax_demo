@@ -1,7 +1,4 @@
 defmodule PaxDemoWeb.CoreComponents do
-  # NOTE: most of these components are default that still use tailwind. Just those I'm using have been updated
-  #       to use Bootstrap intead.
-
   @moduledoc """
   Provides core UI components.
 
@@ -117,18 +114,22 @@ defmodule PaxDemoWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "alert alert-dismissible",
-        @kind == :info && "alert-success",
-        @kind == :error && "alert-danger"
+        "fixed top-2 right-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
+        @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
+        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
       ]}
       style={@hidden && "display: none;"}
       {@rest}
     >
-      <b :if={@title}>
+      <p :if={@title} class="flex items-center gap-1.5 text-sm font-semibold leading-6">
+        <.icon :if={@kind == :info} name="hero-information-circle-mini" class="h-4 w-4" />
+        <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="h-4 w-4" />
         <%= @title %>
-      </b>
-      <%= msg %>
-      <button type="button" class="btn-close" aria-label={gettext("close")}></button>
+      </p>
+      <p class="mt-2 text-sm leading-5"><%= msg %></p>
+      <button type="button" class="group absolute top-1 right-1 p-2" aria-label={gettext("close")}>
+        <.icon name="hero-x-mark-solid" class="h-5 w-5 opacity-40 group-hover:opacity-70" />
+      </button>
     </div>
     """
   end
@@ -149,15 +150,93 @@ defmodule PaxDemoWeb.CoreComponents do
     <.flash
       id="client-error"
       kind={:error}
+      title="We can't find the internet"
+      phx-disconnected={show(".phx-client-error #client-error")}
+      phx-connected={hide("#client-error")}
+      hidden
+    >
+      Attempting to reconnect <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
+    </.flash>
+
+    <.flash
+      id="server-error"
+      kind={:error}
+      title="Something went wrong!"
+      phx-disconnected={show(".phx-server-error #server-error")}
+      phx-connected={hide("#server-error")}
+      hidden
+    >
+      Hang in there while we get back on track <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
+    </.flash>
+    """
+  end
+
+  @doc """
+  Renders flash notices using bootstrap.
+
+  ## Examples
+
+      <.bsflash kind={:info} flash={@flash} />
+      <.bsflash kind={:info} phx-mounted={show("#flash")}>Welcome Back!</.flash>
+  """
+  attr :id, :string, default: "flash", doc: "the optional id of flash container"
+  attr :flash, :map, default: %{}, doc: "the map of flash messages to display"
+  attr :title, :string, default: nil
+  attr :kind, :atom, values: [:info, :error], doc: "used for styling and flash lookup"
+  attr :hidden, :boolean, default: false
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
+
+  slot :inner_block, doc: "the optional inner block that renders the flash message"
+
+  def bsflash(assigns) do
+    ~H"""
+    <div
+      :if={msg = render_slot(@inner_block) || Phoenix.Flash.get(@flash, @kind)}
+      id={@id}
+      phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
+      role="alert"
+      class={[
+        "alert alert-dismissible",
+        @kind == :info && "alert-success",
+        @kind == :error && "alert-danger"
+      ]}
+      style={@hidden && "display: none;"}
+      {@rest}
+    >
+      <b :if={@title}>
+        <%= @title %>
+      </b>
+      <%= msg %>
+      <button type="button" class="btn-close" aria-label={gettext("close")}></button>
+    </div>
+    """
+  end
+
+  @doc """
+  Shows the flash group with standard titles and content using bootstrap.
+
+  ## Examples
+
+      <.flash_group flash={@flash} />
+  """
+  attr :flash, :map, required: true, doc: "the map of flash messages"
+
+  def bsflash_group(assigns) do
+    ~H"""
+    <.bsflash kind={:info} title="Success!" flash={@flash} />
+    <.bsflash kind={:error} title="Error!" flash={@flash} />
+    <.bsflash
+      id="client-error"
+      kind={:error}
       title="Disconnected!"
       phx-disconnected={show(".phx-client-error #client-error")}
       phx-connected={hide("#client-error")}
       hidden
     >
       Attempting to reconnect...
-    </.flash>
+    </.bsflash>
 
-    <.flash
+    <.bsflash
       id="server-error"
       kind={:error}
       title="Error!"
@@ -166,7 +245,7 @@ defmodule PaxDemoWeb.CoreComponents do
       hidden
     >
       Hang in there while we get back on track...
-    </.flash>
+    </.bsflash>
     """
   end
 
@@ -586,11 +665,22 @@ defmodule PaxDemoWeb.CoreComponents do
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do
-    JS.show(js, to: selector)
+    JS.show(js,
+      to: selector,
+      transition:
+        {"transition-all transform ease-out duration-300", "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
+         "opacity-100 translate-y-0 sm:scale-100"}
+    )
   end
 
   def hide(js \\ %JS{}, selector) do
-    JS.hide(js, to: selector)
+    JS.hide(js,
+      to: selector,
+      time: 200,
+      transition:
+        {"transition-all transform ease-in duration-200", "opacity-100 translate-y-0 sm:scale-100",
+         "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
+    )
   end
 
   def show_modal(js \\ %JS{}, id) when is_binary(id) do
