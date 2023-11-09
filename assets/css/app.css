@@ -45,10 +45,6 @@ but it is the most flexible option.
 
 /* Pax.Interface.Components */
 
-.pax-index-table {
-    @apply text-sm;
-}
-
 .pax-index-table-head-row {
     @apply border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-300;
 }
@@ -80,16 +76,19 @@ but it is the most flexible option.
     @apply bg-red-100 border-red-300 ring-red-700 dark:bg-red-900 dark:border-red-700 dark:ring-red-500;
 }
 
-.pax-field-error {
-    @apply text-red-700 dark:text-red-400;
-}
-
-/* Fix checkbox alignment instead of Tailwind's naive `vertical-align: middle` */
-input[type="checkbox"] {
+.pax-field-control-checkbox {
     vertical-align: top;
     height: 1em;
     width: 1em;
     margin-top: 0.25em;
+}
+
+.pax-field-errors {
+    margin-top: .5em;
+}
+
+.pax-field-error {
+    @apply text-red-700 dark:text-red-400;
 }
 
 @import "tailwindcss/utilities";
