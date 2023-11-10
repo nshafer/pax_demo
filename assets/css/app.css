@@ -43,6 +43,10 @@ but it is the most flexible option.
     @apply bg-zinc-500;
 }
 
+.pax-button-tertiary {
+    @apply bg-transparent;
+}
+
 /* Pax.Interface.Components */
 
 .pax-index-table-head-row {
@@ -60,6 +64,16 @@ but it is the most flexible option.
 .pax-index-table-datacell {
     @apply py-1 px-2 first:pl-4 last:pr-4;
 }
+
+.pax-detail-header {
+    @apply pb-2 border-b border-zinc-200 dark:border-zinc-700 items-end;
+}
+
+/* .pax-title-breadcrumbs {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+} */
 
 /* Pax.Field.Components */
 
