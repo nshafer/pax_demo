@@ -26,6 +26,18 @@ defmodule PaxDemoWeb.Router do
     live "/labels/:id", LabelLive, :show
     live "/labels/:id/edit", LabelLive, :edit
     live "/labels/:id/delete", LabelLive, :delete
+
+    live "/artists", ArtistLive, :index
+    live "/artists/new", ArtistLive, :new
+    live "/artists/:id", ArtistLive, :show
+    live "/artists/:id/edit", ArtistLive, :edit
+    live "/artists/:id/delete", ArtistLive, :delete
+
+    live "/albums", AlbumLive, :index
+    live "/albums/new", AlbumLive, :new
+    live "/albums/:id", AlbumLive, :show
+    live "/albums/:id/edit", AlbumLive, :edit
+    live "/albums/:id/delete", AlbumLive, :delete
   end
 
   scope "/", PaxDemoWeb do
