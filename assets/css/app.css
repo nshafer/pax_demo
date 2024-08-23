@@ -32,7 +32,11 @@ but it is the most flexible option.
 /* Pax.Components */
 
 .pax-link {
-    @apply font-bold text-sky-700 hover:text-sky-600 dark:text-sky-500 dark:hover:text-sky-400 hover:underline;
+    @apply text-sky-700 hover:text-sky-600 dark:text-sky-500 dark:hover:text-sky-400 hover:underline;
+}
+
+.pax-link.disabled {
+    @apply text-zinc-500;
 }
 
 .pax-button {
@@ -45,6 +49,31 @@ but it is the most flexible option.
 
 .pax-button-tertiary {
     @apply bg-transparent;
+}
+
+.pax-select {
+    @apply bg-transparent;
+}
+
+.pax-input {
+    @apply bg-transparent;
+}
+
+/* Plugins */
+.pax-pagination-page-select {
+    max-width: 7em;
+}
+
+.pax-pagination-page-select.has-errors:not(.phx-no-feedback) {
+    @apply bg-red-100 border-red-300 ring-red-700 dark:bg-red-900 dark:border-red-700 dark:ring-red-500;
+}
+
+.pax-pagination-page-input {
+    max-width: 5em;
+}
+
+.pax-pagination-page-input.has-errors:not(.phx-no-feedback) {
+    @apply bg-red-100 border-red-300 ring-red-700 dark:bg-red-900 dark:border-red-700 dark:ring-red-500;
 }
 
 /* Pax.Interface.Components */

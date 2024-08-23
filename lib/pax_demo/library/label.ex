@@ -9,6 +9,8 @@ defmodule PaxDemo.Library.Label do
     field :founded, :integer
     field :accepting_submissions, :boolean, default: false
 
+    has_many :artists, PaxDemo.Library.Artist, foreign_key: :current_label_id
+
     timestamps()
   end
 

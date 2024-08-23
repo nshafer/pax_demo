@@ -5,7 +5,7 @@ defmodule PaxDemoWeb.LabelLive do
 
   @impl true
   def render(assigns) do
-    # dbg(assigns.pax)
+    # dbg(assigns.pax.url)
 
     # if assigns[:object] do
     #   IO.puts("Object: #{inspect(assigns[:object])}")
@@ -16,6 +16,11 @@ defmodule PaxDemoWeb.LabelLive do
     # end
 
     ~H"""
+    <div>
+      Time: <%= @time %>
+      <.button phx-click="tick">Tick</.button>
+    </div>
+
     <%= if assigns[:pax] do %>
       <.pax_index :if={@live_action == :index} pax={@pax} objects={@objects} />
       <.pax_show :if={@live_action == :show} pax={@pax} object={@object} />
@@ -27,6 +32,7 @@ defmodule PaxDemoWeb.LabelLive do
     """
   end
 
+  # EXAMPLE: don't perform full pax init on initial non-live hit
   # @impl true
   # def pax_init(_params, _session, socket) do
   #   if connected?(socket) do
@@ -37,8 +43,29 @@ defmodule PaxDemoWeb.LabelLive do
   # end
 
   @impl true
+  def mount(_params, _session, socket) do
+    {:ok, assign(socket, :time, DateTime.utc_now())}
+  end
+
+  @impl true
+  def handle_event("tick", _params, socket) do
+    {:noreply, assign(socket, :time, DateTime.utc_now())}
+  end
+
+  @impl true
   def adapter(_socket),
     do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Label}
+
+  @impl true
+  def plugins(_socket) do
+    [
+      Pax.Plugins.Pagination
+      # {Pax.Plugins.Pagination, objects_per_page: 4}
+    ]
+  end
+
+  # Plugin options
+  # def objects_per_page(), do: 3
 
   @impl true
   def index_path(_socket), do: ~p"/labels/"
@@ -47,10 +74,10 @@ defmodule PaxDemoWeb.LabelLive do
   def new_path(_socket), do: ~p"/labels/new"
 
   @impl true
-  def show_path(object, _socket), do: ~p"/labels/#{object.id}"
+  def show_path(object, _socket), do: ~p"/labels/#{object}"
 
   @impl true
-  def edit_path(object, _socket), do: ~p"/labels/#{object.id}/edit"
+  def edit_path(object, _socket), do: ~p"/labels/#{object}/edit"
 
   @impl true
   def object_name(object, _socket), do: object.name
