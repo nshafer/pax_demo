@@ -32,7 +32,7 @@ config :esbuild,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.3.5",
+  version: "3.3.6",
   default: [
     args: ~w( --config=tailwind.config.js --input=css/app.css --output=../priv/static/assets/app.css ),
     cd: Path.expand("../assets", __DIR__)
@@ -64,6 +64,9 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Configure Flop
+config :flop, repo: PaxDemo.Repo
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
