@@ -19,7 +19,7 @@ defmodule PaxDemoWeb.AlbumLive do
 
   @impl true
   def adapter(_socket),
-    do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album}
+    do: {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album, id_field: :uuid}
 
   @impl true
   def plugins(_socket) do
@@ -36,10 +36,10 @@ defmodule PaxDemoWeb.AlbumLive do
   def new_path(_socket), do: ~p"/albums/new"
 
   @impl true
-  def show_path(object, _socket), do: ~p"/albums/#{object}"
+  def show_path(object, _socket), do: ~p"/albums/#{object.uuid}"
 
   @impl true
-  def edit_path(object, _socket), do: ~p"/albums/#{object}/edit"
+  def edit_path(object, _socket), do: ~p"/albums/#{object.uuid}/edit"
 
   @impl true
   def object_name(object, _socket), do: object.name
