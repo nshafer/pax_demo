@@ -31,7 +31,7 @@ defmodule PaxDemoWeb.MainAdmin.LabelResource do
           {:name, :string},
           {:slug, :string}
         ],
-        {:rating, :float, label: "Rating (0-5)", round: 2},
+        [{:rating, :float, label: "Rating (0-5)", round: 2}, :founded],
         {:accepting_submissions, :boolean, true: "Yes", false: "No"}
       ],
       meta: [
