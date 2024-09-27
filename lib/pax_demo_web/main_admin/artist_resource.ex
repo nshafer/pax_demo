@@ -5,25 +5,6 @@ defmodule PaxDemoWeb.MainAdmin.ArtistResource do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Artist}
   end
 
-  # def index_fields(_socket) do
-  #   [:id, {:name, link: true}, :rating, :started, :ended]
-  # end
-
-  # def fieldsets(_socket) do
-  #   [
-  #     [:name, :slug],
-  #     :rating,
-  #     [:started, :ended],
-  #     :current_label_id
-  #   ]
-  # end
-
-  # def fieldsets(_socket) do
-  #   [
-  #     [{:name, :string}, {:slug, :string}],
-  #     {:rating, :float, round: 2},
-  #     [{:started, :datetime}, {:ended, :datetime}],
-  #     {:current_label_id, :integer}
-  #   ]
-  # end
+  # This purposefully left at the absolute minimum amount of config to show default
+  # configuration derived from the adapter
 end

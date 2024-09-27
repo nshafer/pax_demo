@@ -5,25 +5,24 @@ defmodule PaxDemoWeb.MainAdmin.AlbumResource do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Album, id_field: :uuid}
   end
 
-  def index_fields(_socket) do
+  def pax_config(_socket) do
     [
-      :id,
-      {:uuid, link: true},
-      {:name, link: true},
-      {:rating, round: 2},
-      {:length, :string, value: {__MODULE__, :length}}
-    ]
-  end
-
-  def fieldsets(_socket) do
-    [
-      default: [
-        [{:id, immutable: true}, {:uuid, immutable: true}],
-        :name,
-        :rating,
-        :length_sec,
-        :artist_id,
+      index_fields: [
+        :id,
+        {:uuid, link: true},
+        {:name, link: true},
+        {:rating, round: 2},
         {:length, :string, value: {__MODULE__, :length}}
+      ],
+      fieldsets: [
+        default: [
+          [{:id, immutable: true}, {:uuid, immutable: true}],
+          :name,
+          :rating,
+          :length_sec,
+          :artist_id,
+          {:length, :string, value: {__MODULE__, :length}}
+        ]
       ]
     ]
   end

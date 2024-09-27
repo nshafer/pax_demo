@@ -30,45 +30,34 @@ defmodule PaxDemoWeb.AlbumLive do
   end
 
   @impl true
-  def index_path(_socket), do: ~p"/albums/"
-
-  @impl true
-  def new_path(_socket), do: ~p"/albums/new"
-
-  @impl true
-  def show_path(object, _socket), do: ~p"/albums/#{object.uuid}"
-
-  @impl true
-  def edit_path(object, _socket), do: ~p"/albums/#{object.uuid}/edit"
-
-  @impl true
-  def object_name(object, _socket), do: object.name
-
-  @impl true
-  def index_fields(_socket) do
+  def pax_config(_socket) do
     [
-      :id,
-      {:name, link: true},
-      :rating,
-      :length_sec
-      # :inserted_at,
-      # {:updated_at, :datetime, format: "%Y-%m-%d %H:%M:%S"}
-    ]
-  end
-
-  @impl true
-  def fieldsets(_socket) do
-    [
-      default: [
-        :name,
-        [:rating, :length_sec]
+      index_path: ~p"/albums",
+      new_path: ~p"/albums/new",
+      show_path: fn object, _socket -> ~p"/albums/#{object.uuid}" end,
+      edit_path: fn object, _socket -> ~p"/albums/#{object.uuid}/edit" end,
+      object_name: fn object, _socket -> object.name end,
+      objects_per_page: 20,
+      index_fields: [
+        :id,
+        {:name, link: true},
+        :rating,
+        :length_sec
+        # :inserted_at,
+        # {:updated_at, :datetime, format: "%Y-%m-%d %H:%M:%S"}
       ],
-      metadata: [
-        [
-          {:id, immutable: true},
-          {:uuid, immutable: true},
-          {:inserted_at, :datetime, immutable: true},
-          {:updated_at, :datetime, immutable: true}
+      fieldsets: [
+        default: [
+          :name,
+          [:rating, :length_sec]
+        ],
+        metadata: [
+          [
+            {:id, immutable: true},
+            {:uuid, immutable: true},
+            {:inserted_at, :datetime, immutable: true},
+            {:updated_at, :datetime, immutable: true}
+          ]
         ]
       ]
     ]
