@@ -42,8 +42,9 @@ defmodule PaxDemoWeb do
         formats: [:html, :json],
         layouts: [html: PaxDemoWeb.Layouts]
 
+      use Gettext, backend: PaxDemoWeb.Gettext
+
       import Plug.Conn
-      import PaxDemoWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -81,11 +82,12 @@ defmodule PaxDemoWeb do
 
   defp html_helpers do
     quote do
+      # Translation
+      use Gettext, backend: PaxDemoWeb.Gettext
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
       import PaxDemoWeb.CoreComponents
-      import PaxDemoWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
