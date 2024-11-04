@@ -19,7 +19,7 @@ config :pax_demo, PaxDemo.Repo,
 config :pax_demo, PaxDemoWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
@@ -52,15 +52,42 @@ config :pax_demo, PaxDemoWeb.Endpoint,
 # configured to run both http and https servers on
 # different ports.
 
-# Watch static and templates for browser reloading.
-config :pax_demo, PaxDemoWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/pax_demo_web/(controllers|live|components)/.*(ex|heex)$"
+# If a local copy of Pax is being used as our dependency, then set up some extra debug configuration
+if Mix.Project.deps_scms()[:pax] == Mix.SCM.Path do
+  pax_path = Mix.Project.deps_paths()[:pax]
+
+  IO.puts("Using local copy of Pax from #{pax_path}")
+
+  # Configure Phoenix.CodeReloader to reload pax as well as this application on every request, instead of just this app
+  config :pax_demo, PaxDemoWeb.Endpoint, reloadable_apps: [:pax_demo, :pax]
+
+  # Configure Phoenix.LiveReloader to Watch this app and the pax app during development and trigger reloads
+  config :phoenix_live_reload, :dirs, [pax_path, "./"]
+
+  config :pax_demo, PaxDemoWeb.Endpoint,
+    live_reload: [
+      patterns: [
+        ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
+        ~r"priv/gettext/.*(po)$",
+        ~r"lib/pax_demo_web/(controllers|live|components)/.*(ex|heex)$",
+        ~r"lib/pax/?.*/(controllers|live|components)/.*(ex|heex)$"
+      ]
     ]
-  ]
+
+  # Pax configuration for development
+  config :pax,
+    validate_config_spec: true
+else
+  # Watch static and templates for browser reloading.
+  config :pax_demo, PaxDemoWeb.Endpoint,
+    live_reload: [
+      patterns: [
+        ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
+        ~r"priv/gettext/.*(po)$",
+        ~r"lib/pax_demo_web/(controllers|live|components)/.*(ex|heex)$"
+      ]
+    ]
+end
 
 # Enable dev routes for dashboard and mailbox
 config :pax_demo, dev_routes: true

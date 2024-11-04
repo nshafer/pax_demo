@@ -44,19 +44,29 @@ defmodule PaxDemo.MixProject do
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
-       github: "tailwindlabs/heroicons",
-       tag: "v2.1.1",
-       sparse: "optimized",
-       app: false,
-       compile: false,
-       depth: 1},
+       github: "tailwindlabs/heroicons", tag: "v2.1.1", sparse: "optimized", app: false, compile: false, depth: 1},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      pax_dep()
     ]
+  end
+
+  # Look for a special file, "local/pax_path.txt" to determine if we should use a local copy of Pax. That file can
+  # contain a path to a local copy of Pax, relative to this mix.exs file, which will be used as a dependency.
+  # If the file does not exist, we will use the latest version of Pax from Hex.
+  defp pax_dep() do
+    path_file = Path.join(__DIR__, "local/pax_path.txt")
+
+    if File.exists?(path_file) do
+      path = path_file |> File.read!() |> String.trim()
+      {:pax, path: path}
+    else
+      {:pax, "~> 0.1.0"}
+    end
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

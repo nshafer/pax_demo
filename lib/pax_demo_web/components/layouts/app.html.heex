@@ -1,32 +1,19 @@
-<header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
-    <div class="flex items-center gap-4">
-      <a href="/">
-        <img src={~p"/images/logo.svg"} width="36" />
-      </a>
-      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        v<%= Application.spec(:phoenix, :vsn) %>
-      </p>
+<header class="container mx-auto px-4 py-3">
+  <div class="bg-zinc-200 dark:bg-zinc-700 py-2 px-4 rounded flex justify-start items-baseline gap-8">
+    <.link class="text-xl font-bold" navigate={~p"/"}>Pax Demo</.link>
+    <div class="flex gap-4 text-uppercase">
+      <.link navigate={~p"/books"}>Books</.link>
+      <.link navigate={~p"/authors"}>Authors</.link>
     </div>
-    <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a href="https://twitter.com/elixirphoenix" class="hover:text-zinc-700">
-        @elixirphoenix
-      </a>
-      <a href="https://github.com/phoenixframework/phoenix" class="hover:text-zinc-700">
-        GitHub
-      </a>
-      <a
-        href="https://hexdocs.pm/phoenix/overview.html"
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
-      >
-        Get Started <span aria-hidden="true">&rarr;</span>
-      </a>
+    <div class="flex gap-4 ml-auto">
+      <.link navigate={~p"/admin"} target="_blank">Admin</.link>
     </div>
   </div>
 </header>
-<main class="px-4 py-20 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-2xl">
-    <.flash_group flash={@flash} />
+
+<main class="container px-4 mx-auto">
+  <.flash_group flash={@flash} />
+  <div class="mt-3">
     <%= @inner_content %>
   </div>
 </main>

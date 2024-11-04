@@ -2,4 +2,136 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
+/* Make sure the client error flash doesn't appear while LV is loading */
+[data-phx-main]:not(.phx-loading, .phx-error, .phx-connected) #client-error {
+    display: none !important;
+}
+
+/* App Styles
+All styles for the main public application using Pax.Interface to build CRUD interfaces.
+
+This is not how the admin pages are styled, that's done by Pax.Admin's "admin.css" file included in its own
+root.html.heex.
+
+This uses Tailwind for basic styling by applying tailwind classes to the existing .pax-* classes that are
+from the default Pax components. This is the easiest way to customize the style of your Pax CRUD interface.
+
+If you're not using Tailwind, another options is to just define all of the CSS yourself, such as
+
+    .pax-index-table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+Another option is to provide your own custom components instead of the Pax Components, which would allow you
+to change the structure of the HTML as well as add the tailwind utility classes directly. This is a lot of work,
+but it is the most flexible option.
+*/
+
+/* Pax.Components */
+
+.pax-link {
+    @apply text-sky-700 hover:text-sky-600 dark:text-sky-500 dark:hover:text-sky-400 hover:underline;
+}
+
+.pax-link.disabled {
+    @apply text-zinc-500;
+}
+
+.pax-button {
+    @apply py-1 px-2 bg-sky-800 text-zinc-100 rounded;
+}
+
+.pax-button-secondary {
+    @apply bg-zinc-500;
+}
+
+.pax-button-tertiary {
+    @apply bg-transparent;
+}
+
+.pax-select {
+    @apply bg-transparent;
+}
+
+.pax-input {
+    @apply bg-transparent;
+}
+
+/* Plugins */
+.pax-pagination-page-select {
+    max-width: 7em;
+}
+
+.pax-pagination-page-select.has-errors:not(.phx-no-feedback) {
+    @apply bg-red-100 border-red-300 ring-red-700 dark:bg-red-900 dark:border-red-700 dark:ring-red-500;
+}
+
+.pax-pagination-page-input {
+    max-width: 5em;
+}
+
+.pax-pagination-page-input.has-errors:not(.phx-no-feedback) {
+    @apply bg-red-100 border-red-300 ring-red-700 dark:bg-red-900 dark:border-red-700 dark:ring-red-500;
+}
+
+/* Pax.Interface.Components */
+
+.pax-index-table-head-row {
+    @apply border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-300;
+}
+
+.pax-index-table-header {
+    @apply uppercase text-xs py-2 px-2 first:pl-4 last:pr-4;
+}
+
+.pax-index-table-row {
+    @apply border-b border-zinc-200 dark:border-zinc-800 even:bg-zinc-50 dark:even:bg-zinc-800;
+}
+
+.pax-index-table-datacell {
+    @apply py-1 px-2 first:pl-4 last:pr-4;
+}
+
+.pax-detail-header {
+    @apply pb-2 border-b border-zinc-200 dark:border-zinc-700 items-end;
+}
+
+/* .pax-title-breadcrumbs {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+} */
+
+/* Pax.Field.Components */
+
+.pax-field-label {
+    @apply font-bold;
+}
+
+.pax-field-control-input {
+    @apply py-[0.5em] px-[0.5em] leading-normal rounded border border-zinc-300 bg-inherit text-black dark:bg-inherit dark:text-white dark:border-zinc-700;
+    font-size: inherit;
+}
+
+.pax-field-control-input.has-errors:not(.phx-no-feedback) {
+    @apply bg-red-100 border-red-300 ring-red-700 dark:bg-red-900 dark:border-red-700 dark:ring-red-500;
+}
+
+.pax-field-control-checkbox {
+    vertical-align: top;
+    height: 1em;
+    width: 1em;
+    margin-top: 0.25em;
+}
+
+.pax-field-errors {
+    margin-top: .5em;
+}
+
+.pax-field-error {
+    @apply text-red-700 dark:text-red-400;
+}
+
