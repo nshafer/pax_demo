@@ -16,11 +16,11 @@ defmodule PaxDemoWeb.BookLive do
     """
   end
 
-  def adapter(_socket) do
+  def pax_adapter(_socket) do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Book}
   end
 
-  def plugins(_socket) do
+  def pax_plugins(_socket) do
     [
       Pax.Plugins.Pagination
     ]
