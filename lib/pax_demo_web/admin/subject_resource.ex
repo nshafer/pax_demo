@@ -5,7 +5,7 @@ defmodule PaxDemoWeb.Admin.SubjectResource do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Subject}
   end
 
-  def pax_config(_socket) do
+  def config(_socket) do
     [
       index_fields: [
         {:name, link: true}

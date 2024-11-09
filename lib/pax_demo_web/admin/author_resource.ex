@@ -5,7 +5,7 @@ defmodule PaxDemoWeb.Admin.AuthorResource do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Author}
   end
 
-  def pax_config(_socket) do
+  def config(_socket) do
     [
       index_fields: [
         :id,
