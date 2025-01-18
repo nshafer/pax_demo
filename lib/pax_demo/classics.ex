@@ -135,7 +135,7 @@ defmodule PaxDemo.Classics do
   def create_book(%{} = book, %Language{} = language, %Author{} = author) do
     %Book{
       title: book["bibliography"]["title"],
-      slug: slugify(book["bibliography"]["title"]),
+      slug: String.slice("#{book["metadata"]["id"]}-#{slugify(book["bibliography"]["title"])}", 0, 255),
       publication_date:
         Date.new!(
           book["bibliography"]["publication"]["year"],

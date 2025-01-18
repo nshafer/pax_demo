@@ -56,6 +56,8 @@ defmodule PaxDemo.Repo.Migrations.CreateAuthors do
       timestamps(type: :utc_datetime)
     end
 
+    create unique_index(:books, [:slug])
+
     create table(:books_subjects) do
       add :book_id, references(:books, on_delete: :delete_all)
       add :subject_id, references(:subjects, on_delete: :delete_all)
