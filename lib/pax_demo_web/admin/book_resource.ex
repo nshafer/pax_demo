@@ -2,11 +2,13 @@ defmodule PaxDemoWeb.Admin.BookResource do
   use Pax.Admin.Resource
 
   def adapter(_socket) do
-    {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Book}
+    {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Book, id_field: :slug}
   end
 
   def config(_socket) do
     [
+      object_name: fn object, _socket -> object.title end,
+      id_fields: [:id, :slug],
       index_fields: [
         :id,
         {:title, link: true},

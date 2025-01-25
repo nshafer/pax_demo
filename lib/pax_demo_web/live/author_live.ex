@@ -30,8 +30,8 @@ defmodule PaxDemoWeb.AuthorLive do
     [
       index_path: ~p"/authors",
       new_path: ~p"/authors/new",
-      show_path: fn object, _socket -> ~p"/authors/#{object}" end,
-      edit_path: fn object, _socket -> ~p"/authors/#{object}/edit" end,
+      show_path: fn object, _socket -> ~p"/authors/#{object.id}/#{object.name}" end,
+      edit_path: fn object, _socket -> ~p"/authors/#{object.id}/#{object.name}/edit" end,
       object_name: fn object, _socket -> object.name end,
       index_fields: [
         {:name, link: true},

@@ -22,15 +22,15 @@ defmodule PaxDemoWeb.Router do
 
     live "/books", BookLive, :index
     live "/books/new", BookLive, :new
-    live "/books/:id", BookLive, :show
-    live "/books/:id/edit", BookLive, :edit
-    live "/books/:id/delete", BookLive, :delete
+    live "/books/:id/:slug", BookLive, :show
+    live "/books/:id/:slug/edit", BookLive, :edit
+    live "/books/:id/:slug/delete", BookLive, :delete
 
     live "/authors", AuthorLive, :index
     live "/authors/new", AuthorLive, :new
-    live "/authors/:id", AuthorLive, :show
-    live "/authors/:id/edit", AuthorLive, :edit
-    live "/authors/:id/delete", AuthorLive, :delete
+    live "/authors/:id/:name", AuthorLive, :show
+    live "/authors/:id/:name/edit", AuthorLive, :edit
+    live "/authors/:id/:name/delete", AuthorLive, :delete
   end
 
   scope "/admin", PaxDemoWeb do
