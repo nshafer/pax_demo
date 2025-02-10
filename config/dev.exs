@@ -73,10 +73,6 @@ if Mix.Project.deps_scms()[:pax] == Mix.SCM.Path do
         ~r"lib/pax/?.*/(controllers|live|components)/.*(ex|heex)$"
       ]
     ]
-
-  # Pax configuration for development
-  config :pax,
-    validate_config_spec: true
 else
   # Watch static and templates for browser reloading.
   config :pax_demo, PaxDemoWeb.Endpoint,
@@ -88,6 +84,9 @@ else
       ]
     ]
 end
+
+# Pax configuration for development
+config :pax, validate_config_spec: true
 
 # Enable dev routes for dashboard and mailbox
 config :pax_demo, dev_routes: true
