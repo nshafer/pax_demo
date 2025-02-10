@@ -5,14 +5,7 @@ defmodule PaxDemoWeb.AuthorLive do
 
   def render(assigns) do
     ~H"""
-    <%= if assigns[:pax] do %>
-      <.pax_index :if={@live_action == :index} pax={@pax} />
-      <.pax_show :if={@live_action == :show} pax={@pax} />
-      <.pax_new :if={@live_action == :new} pax={@pax} />
-      <.pax_edit :if={@live_action == :edit} pax={@pax} />
-    <% else %>
-      Loading...
-    <% end %>
+    <.pax_interface :if={assigns[:pax]} pax={@pax} action={@live_action} />
     """
   end
 

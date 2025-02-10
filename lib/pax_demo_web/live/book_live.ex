@@ -5,15 +5,11 @@ defmodule PaxDemoWeb.BookLive do
 
   def render(assigns) do
     # dbg(assigns.pax)
+    # dbg(assigns.pax.config)
 
     ~H"""
     <%= if assigns[:pax] do %>
-      <.pax_index :if={@live_action == :index} pax={@pax} />
-      <.pax_show :if={@live_action == :show} pax={@pax} />
-      <.pax_new :if={@live_action == :new} pax={@pax} />
-      <.pax_edit :if={@live_action == :edit} pax={@pax} />
-    <% else %>
-      Loading...
+      <.pax_interface pax={@pax} action={@live_action} />
     <% end %>
     """
   end
@@ -32,8 +28,10 @@ defmodule PaxDemoWeb.BookLive do
 
   def pax_config(_socket) do
     [
-      repo: PaxDemo.Repo,
-      schema: PaxDemo.Library.Book,
+      adapter: [
+        repo: PaxDemo.Repo,
+        schema: PaxDemo.Library.Book
+      ],
       singular_name: "Book",
       plural_name: "Books",
       object_name: fn object, _socket -> object.title end,
@@ -44,7 +42,7 @@ defmodule PaxDemoWeb.BookLive do
       lookup_params: ["id", "slug"],
       id_fields: [:id, :slug],
       index_fields: [
-        {:title, link: true},
+        {:title, link: true, truncate: 30},
         :rank,
         :downloads,
         :reading_level,
@@ -66,6 +64,11 @@ defmodule PaxDemoWeb.BookLive do
         statistics: [
           [:rank, :downloads],
           [:reading_level, :words]
+        ]
+      ],
+      plugins: [
+        pagination: [
+          objects_per_page: 15
         ]
       ]
     ]

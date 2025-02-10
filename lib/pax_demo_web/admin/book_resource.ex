@@ -11,10 +11,10 @@ defmodule PaxDemoWeb.Admin.BookResource do
       id_fields: [:id, :slug],
       index_fields: [
         :id,
-        {:title, link: true},
+        {:title, link: true, truncate: 50},
         :rank,
         :downloads,
-        :reading_level,
+        {:reading_level, round: 1},
         :words,
         :publication_date
       ],
