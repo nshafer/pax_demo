@@ -51,8 +51,6 @@ defmodule PaxDemoWeb.BookLive do
       fieldsets: [
         default: [
           [:title, :slug],
-          [:rank, :downloads],
-          [:reading_level, :words],
           [:author_id, :language_id],
           :visible
         ],
