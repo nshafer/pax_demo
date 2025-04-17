@@ -26,10 +26,8 @@ defmodule PaxDemoWeb.Admin.BookResource do
           :language_id
         ],
         metadata: [
-          :pg_id,
-          :publication_date,
-          :inserted_at,
-          :updated_at
+          [:pg_id, :publication_date],
+          [{:inserted_at, immutable: true}, {:updated_at, immutable: true}]
         ],
         statistics: [
           [:rank, :downloads],

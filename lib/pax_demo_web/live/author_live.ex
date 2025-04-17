@@ -5,7 +5,7 @@ defmodule PaxDemoWeb.AuthorLive do
 
   def render(assigns) do
     ~H"""
-    <.pax_interface :if={assigns[:pax]} pax={@pax} action={@live_action} />
+    {pax_interface(assigns)}
     """
   end
 
@@ -15,6 +15,8 @@ defmodule PaxDemoWeb.AuthorLive do
 
   def pax_plugins(_socket) do
     [
+      Pax.Plugins.Breadcrumbs,
+      Pax.Plugins.Title,
       Pax.Plugins.Pagination
     ]
   end
