@@ -7,7 +7,7 @@ defmodule PaxDemoWeb.Admin.SubjectResource do
 
   def config(_socket) do
     [
-      index_fields: [
+      fields: [
         {:name, link: true}
       ]
     ]

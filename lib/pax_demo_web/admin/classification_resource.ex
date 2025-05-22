@@ -7,7 +7,7 @@ defmodule PaxDemoWeb.Admin.ClassificationResource do
 
   def config(_socket) do
     [
-      index_fields: [
+      fields: [
         {:name, link: true},
         :short
       ]

@@ -1,11 +1,10 @@
 defmodule PaxDemoWeb.AuthorLive do
   use PaxDemoWeb, :live_view
   use Pax.Interface
-  import Pax.Interface.Components
 
   def render(assigns) do
     ~H"""
-    {pax_interface(assigns)}
+    {Pax.Interface.Components.pax_interface(assigns)}
     """
   end
 
@@ -17,7 +16,9 @@ defmodule PaxDemoWeb.AuthorLive do
     [
       Pax.Plugins.Breadcrumbs,
       Pax.Plugins.Title,
-      Pax.Plugins.Pagination
+      Pax.Plugins.Pagination,
+      Pax.Plugins.IndexTable,
+      Pax.Plugins.DetailList
     ]
   end
 
@@ -28,7 +29,9 @@ defmodule PaxDemoWeb.AuthorLive do
       show_path: fn object, _socket -> ~p"/authors/#{object.id}/#{object.name}" end,
       edit_path: fn object, _socket -> ~p"/authors/#{object.id}/#{object.name}/edit" end,
       object_name: fn object, _socket -> object.name end,
-      index_fields: [
+      id_fields: [:id, :name],
+      lookup_params: ["id", "name"],
+      fields: [
         {:name, link: true},
         :birth,
         :death

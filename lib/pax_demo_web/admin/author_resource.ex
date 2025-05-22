@@ -9,7 +9,7 @@ defmodule PaxDemoWeb.Admin.AuthorResource do
         repo: PaxDemo.Repo,
         schema: PaxDemo.Library.Author
       ],
-      index_fields: [
+      fields: [
         :id,
         {:name, link: true},
         :birth,

@@ -5,11 +5,20 @@ defmodule PaxDemoWeb.Admin.BookResource do
     {Pax.Adapters.EctoSchema, repo: PaxDemo.Repo, schema: PaxDemo.Library.Book, id_field: :slug}
   end
 
+  def plugins(_socket) do
+    [
+      Pax.Plugins.Title,
+      {Pax.Plugins.Pagination, objects_per_page: 100},
+      Pax.Plugins.IndexTable,
+      Pax.Plugins.DetailFieldsets
+    ]
+  end
+
   def config(_socket) do
     [
       object_name: fn object, _socket -> object.title end,
       id_fields: [:id, :slug],
-      index_fields: [
+      fields: [
         :id,
         {:title, link: true, truncate: 50},
         :rank,
@@ -18,20 +27,27 @@ defmodule PaxDemoWeb.Admin.BookResource do
         :words,
         :publication_date
       ],
-      fieldsets: [
-        default: [
-          [:title, :slug],
-          :visible,
-          :author_id,
-          :language_id
-        ],
-        metadata: [
-          [:pg_id, :publication_date],
-          [{:inserted_at, immutable: true}, {:updated_at, immutable: true}]
-        ],
-        statistics: [
-          [:rank, :downloads],
-          [:reading_level, :words]
+      default_scope: [
+        order_by: :title
+      ],
+      plugins: [
+        detail_fieldsets: [
+          fieldsets: [
+            default: [
+              [:title, :slug],
+              [:author_id, :language_id],
+              :visible
+            ],
+            metadata: [
+              :pg_id,
+              :publication_date,
+              [:inserted_at, :updated_at]
+            ],
+            statistics: [
+              [:rank, :downloads],
+              [:reading_level, :words]
+            ]
+          ]
         ]
       ]
     ]
