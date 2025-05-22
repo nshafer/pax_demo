@@ -25,7 +25,15 @@ defmodule PaxDemoWeb.Admin.BookResource do
         :downloads,
         {:reading_level, round: 1},
         :words,
-        :publication_date
+        :publication_date,
+        {:slug, except: :index},
+        {:author_id, except: :index},
+        {:language_id, except: :index},
+        {:visible, except: :index},
+        {:pg_id, except: :index},
+        {:inserted_at, immutable: true, except: :index},
+        {:updated_at, immutable: true, except: :index},
+        {:words, except: :index}
       ],
       default_scope: [
         order_by: :title

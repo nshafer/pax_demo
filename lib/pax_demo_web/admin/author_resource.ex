@@ -14,6 +14,9 @@ defmodule PaxDemoWeb.Admin.AuthorResource do
         {:name, link: true},
         :birth,
         :death
+      ],
+      default_scope: [
+        order_by: :name
       ]
     ]
   end
