@@ -20,6 +20,12 @@ if System.get_env("PHX_SERVER") do
   config :pax_demo, PaxDemoWeb.Endpoint, server: true
 end
 
+if config_env() == :dev do
+  port = String.to_integer(System.get_env("PORT") || "4000")
+
+  config :pax_demo, PaxDemoWeb.Endpoint, http: [port: port]
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
