@@ -54,17 +54,12 @@ defmodule PaxDemo.MixProject do
     ]
   end
 
-  # Look for a special file, "local/pax_path.txt" to determine if we should use a local copy of Pax. That file can
-  # contain a path to a local copy of Pax, relative to this mix.exs file, which will be used as a dependency.
-  # If the file does not exist, we will use the latest version of Pax from Hex.
+  # If `:pax` is checked out in a sibling directory to this project, then use it directly instead of the hex package.
   defp pax_dep() do
-    path_file = Path.join(__DIR__, "local/pax_path.txt")
-
-    if File.exists?(path_file) do
-      path = path_file |> File.read!() |> String.trim()
-      {:pax, path: path}
+    if File.exists?(Path.join(__DIR__, "../pax/mix.exs")) do
+      {:pax, path: Path.expand("../pax", __DIR__)}
     else
-      {:pax, "~> 0.1.0"}
+      {:pax, ">= 0.0.0"}
     end
   end
 
