@@ -18,7 +18,8 @@ defmodule PaxDemoWeb.AuthorLive do
       Pax.Plugins.Title,
       Pax.Plugins.Pagination,
       Pax.Plugins.IndexTable,
-      Pax.Plugins.DetailList
+      Pax.Plugins.DetailList,
+      Pax.Plugins.NewButton
     ]
   end
 

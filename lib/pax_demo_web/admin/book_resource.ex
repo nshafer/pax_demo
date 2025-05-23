@@ -10,7 +10,8 @@ defmodule PaxDemoWeb.Admin.BookResource do
       Pax.Plugins.Title,
       {Pax.Plugins.Pagination, objects_per_page: 100},
       Pax.Plugins.IndexTable,
-      Pax.Plugins.DetailFieldsets
+      Pax.Plugins.DetailFieldsets,
+      Pax.Plugins.NewButton
     ]
   end
 
